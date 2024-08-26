@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    container_name: poketinder-database
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: pokemon
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: poketinder-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - /var/lib/pgadmin
+    ports:
+      - '5050:80'
