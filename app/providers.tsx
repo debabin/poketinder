@@ -4,7 +4,7 @@ import type { I18nProviderProps } from '@/contexts/i18n';
 import { I18nProvider } from '@/contexts/i18n';
 
 interface ProvidersProps {
-  children: React.ReactNode
+  children: React.ReactNode;
   i18n: Omit<I18nProviderProps, 'children'>;
 }
 

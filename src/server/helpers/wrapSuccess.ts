@@ -1,1 +1,1 @@
-export const wrapSuccess = <Data>(data: Data) => ({ success: true, data });
+export const wrapSuccess = <Data>(data: Data) => ({ data, success: true });

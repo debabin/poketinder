@@ -1,5 +1,5 @@
 export default {
-  'pokemon': {
+  pokemon: {
     input: './src/static/api/poke.yml',
     output: {
       schemas: 'generated/api'

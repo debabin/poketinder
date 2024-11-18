@@ -7,18 +7,18 @@ import type { Name, NamedAPIResource } from '../Common';
  * - Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Generation) for greater details.
  */
 export interface Generation {
-  /** The identifier for this resource */
-  id: number;
-  /** The name for this resource */
-  name: string;
   /** A list of abilities that were introduced in this generation */
   abilities: NamedAPIResource[];
-  /** The name of this resource listed in different languages */
-  names: Name[];
+  /** The identifier for this resource */
+  id: number;
   /** The main region travelled in this generation */
   main_region: NamedAPIResource;
   /** A list of moves that were introduced in this generation */
   moves: NamedAPIResource[];
+  /** The name for this resource */
+  name: string;
+  /** The name of this resource listed in different languages */
+  names: Name[];
   /** A list of Pokémon species that were introduced in this generation */
   pokemon_species: NamedAPIResource[];
   /** A list of types that were introduced in this generation */

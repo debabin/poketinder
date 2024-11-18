@@ -9,25 +9,25 @@ import type { Name, NamedAPIResource } from '../Common';
 export interface EggGroup {
   /** The identifier for this resource */
   id: number;
-  /** The name for this resource */
-  name:
-    | 'monster'
-    | 'water1'
-    | 'water2'
-    | 'water3'
-    | 'bug'
-    | 'flying'
-    | 'ground'
-    | 'fairy'
-    | 'plant'
-    | 'humanshape'
-    | 'mineral'
-    | 'indeterminate'
-    | 'ditto'
-    | 'dragon'
-    | 'no-eggs';
   /** The name of this resource listed in different languages */
   names: Name[];
   /** A list of all Pokémon species that are members of this egg group */
   pokemon_species: NamedAPIResource[];
+  /** The name for this resource */
+  name:
+    | 'bug'
+    | 'ditto'
+    | 'dragon'
+    | 'fairy'
+    | 'flying'
+    | 'ground'
+    | 'humanshape'
+    | 'indeterminate'
+    | 'mineral'
+    | 'monster'
+    | 'no-eggs'
+    | 'plant'
+    | 'water1'
+    | 'water2'
+    | 'water3';
 }

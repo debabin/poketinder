@@ -10,14 +10,14 @@ import type { PokemonEntry } from './pokemon-entry';
  * - See [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9dex) for greater detail
  */
 export interface Pokedex {
-  /** The identifier for this resource */
-  id: number;
-  /** The name for this resource */
-  name: string;
-  /** Whether or not this Pokédex originated in the main series of the video games */
-  is_main_series: boolean;
   /** The description of this resource listed in different languages */
   descriptions: Description[];
+  /** The identifier for this resource */
+  id: number;
+  /** Whether or not this Pokédex originated in the main series of the video games */
+  is_main_series: boolean;
+  /** The name for this resource */
+  name: string;
   /** The name of this resource listed in different languages */
   names: Name[];
   /** A list of Pokémon catalogued in this Pokédex and their indexes */

@@ -7,14 +7,14 @@ import type { Name, NamedAPIResource } from '../Common';
  * - See [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9athlon) for greater details.
  */
 export interface PokeathlonStat {
+  /** A detail of natures which affect this Pokéathlon stat positively or negatively */
+  affecting_natures: NaturePokeathlonStatAffectSets;
   /** The identifier for this resource */
   id: number;
   /** The name for this resource */
-  name: 'speed' | 'power' | 'skill' | 'stamina' | 'jump';
+  name: 'jump' | 'power' | 'skill' | 'speed' | 'stamina';
   /** The name of this resource listed in different languages */
   names: Name[];
-  /** A detail of natures which affect this Pokéathlon stat positively or negatively */
-  affecting_natures: NaturePokeathlonStatAffectSets;
 }
 
 /**
@@ -32,7 +32,7 @@ export interface NaturePokeathlonStatAffect {
  */
 export interface NaturePokeathlonStatAffectSets {
   /** A list of natures and how they change the referenced Pokéathlon stat */
-  increase: NaturePokeathlonStatAffect[];
-  /** A list of natures and how they change the referenced Pokéathlon stat */
   decrease: NaturePokeathlonStatAffect[];
+  /** A list of natures and how they change the referenced Pokéathlon stat */
+  increase: NaturePokeathlonStatAffect[];
 }

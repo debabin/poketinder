@@ -1,7 +1,8 @@
-import { boolean, integer, pgTable, text } from 'drizzle-orm/pg-core';
+import { integer, pgTable } from 'drizzle-orm/pg-core';
 
-export const todo = pgTable('todo', {
+export const statisticTable = pgTable('statistic', {
   id: integer('id').primaryKey(),
-  text: text('text').notNull(),
-  done: boolean('done').default(false).notNull()
+  pass: integer('pass').default(0).notNull(),
+  pokemonId: integer('pokemon_id'),
+  smash: integer('smash').default(0).notNull()
 });

@@ -10,10 +10,10 @@ export interface EncounterMethod {
   id: number;
   /** The name for this resource */
   name: string;
-  /** A good value for sorting */
-  order: number;
   /** The name of this resource listed in different languages */
   names: Name[];
+  /** A good value for sorting */
+  order: number;
 }
 
 /**
@@ -39,12 +39,12 @@ export interface EncounterCondition {
  * - Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Time)
  */
 export interface EncounterConditionValue {
+  /** The condition this encounter condition value pertains to */
+  condition: NamedAPIResource;
   /** The identifier for this resource */
   id: number;
   /** The name for this resource */
   name: string;
-  /** The condition this encounter condition value pertains to */
-  condition: NamedAPIResource;
   /** The name of this resource listed in different languages */
   names: Name[];
 }

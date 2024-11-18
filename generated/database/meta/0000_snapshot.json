@@ -1,11 +1,11 @@
 {
-  "id": "51c0b02f-667a-42ea-a34f-37cf6219f233",
+  "id": "990c003f-070b-4a51-90a7-f58cd58b3a03",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.todo": {
-      "name": "todo",
+    "public.statistic": {
+      "name": "statistic",
       "schema": "",
       "columns": {
         "id": {
@@ -14,18 +14,25 @@
           "primaryKey": true,
           "notNull": true
         },
-        "text": {
-          "name": "text",
-          "type": "text",
+        "pokemon_id": {
+          "name": "pokemon_id",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "done": {
-          "name": "done",
-          "type": "boolean",
+        "smash": {
+          "name": "smash",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "default": false
+          "default": 0
+        },
+        "pass": {
+          "name": "pass",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
         }
       },
       "indexes": {},

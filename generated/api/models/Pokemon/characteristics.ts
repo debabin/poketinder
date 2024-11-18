@@ -7,14 +7,14 @@ import type { Description, NamedAPIResource } from '../Common';
  * - Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Characteristic) for greater detail
  */
 export interface Characteristic {
-  /** The identifier for this resource */
-  id: number;
-  /** The remainder of the highest stat/IV divided by 5 */
-  gene_modulo: number;
-  /** The possible values of the highest stat that would result in a Pokémon recieving this characteristic when divided by 5 */
-  possible_values: number[];
-  /** The highest stat for the referenced characteristic */
-  highest_stat: NamedAPIResource;
   /** Descriptions for the referenced characteristic */
   descriptions: Description[];
+  /** The remainder of the highest stat/IV divided by 5 */
+  gene_modulo: number;
+  /** The highest stat for the referenced characteristic */
+  highest_stat: NamedAPIResource;
+  /** The identifier for this resource */
+  id: number;
+  /** The possible values of the highest stat that would result in a Pokémon recieving this characteristic when divided by 5 */
+  possible_values: number[];
 }

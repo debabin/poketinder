@@ -8,13 +8,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --fix",
+    "format": "prettier --write .",
     "lint-inspector": "npx @eslint/config-inspector",
     "database": "docker compose up --build",
     "generate-api": "orval --config ./orval.config.ts",
     "generate-orm": "drizzle-kit generate"
   },
   "dependencies": {
+    "@radix-ui/react-navigation-menu": "^1.2.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@siberiacancode/fetches": "^1.1.0",
     "@siberiacancode/reactuse": "^0.0.65",
     "@trpc/client": "^11.0.0-rc.485",
     "@trpc/server": "^11.0.0-rc.485",
@@ -35,7 +38,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@siberiacancode/eslint": "^2.2.0",
+    "@siberiacancode/eslint": "^2.5.0",
+    "@siberiacancode/prettier": "^1.1.1",
     "@types/node": "^20",
     "@types/pg": "^8.11.6",
     "@types/react": "^18",

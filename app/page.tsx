@@ -1,111 +1,59 @@
-'use client';
+import type { PokemonSpecies } from '@/generated/api/models';
+import { pokeApi } from '@/utils/api/instance';
+import { getPokemon } from '@/utils/api/requests';
+import { getPokemonBackground, getRandomPokemonId } from '@/utils/helpers';
 
-import Image from 'next/image';
+import {
+  PokemonActions,
+  PokemonCard,
+  PokemonCardBackground,
+  PokemonCardContent,
+  PokemonCardDescription,
+  PokemonCardImage,
+  PokemonCardTitle,
+  PokemonCardTypes,
+  PokemonStatistic
+} from './(components)';
 
-// import { io } from 'socket.io-client';
-import { I18nText } from '@/components/common/i18nText';
-import { Button } from '@/components/ui';
 
-import { addTodo } from './actions';
+const Home = async () => {
+  const pokemonId = getRandomPokemonId();
+  const pokemonResponse = await getPokemon({
+    params: {
+      id: pokemonId
+    }
+  });
 
-import styles from './page.module.css';
+  const pokemonSpeciesResponse = await pokeApi.get<PokemonSpecies>(
+    `pokemon-species/${pokemonResponse.data.id}`
+  );
 
-// const socket = io('http://localhost:3000');
-
-const Home = () => {
   return (
-    <main className={styles.main}>
-      <Button onClick={() => addTodo(1, 'test')}><I18nText path='title' />
-      </Button>
-      <div className={styles.description}>
-        <h1 className='text-3xl font-bold underline'>
-          Hello world!
-        </h1>
-
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href='https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            By{' '}
-            <Image
-              src='/vercel.svg'
-              alt='Vercel Logo'
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <main className='flex justify-center items-center h-full'>
+      <div className='flex gap-4 flex-col'>
+        <div className='w-[300px]'>
+          <PokemonCard className=' h-[400px]' pokemon={pokemonResponse.data}>
+            <PokemonCardBackground
+              src={`backgrounds/bg-${getPokemonBackground(pokemonResponse.data.types[0].type.name)}.png`}
             />
-          </a>
+            <PokemonCardImage />
+            <PokemonCardContent>
+              <PokemonCardTitle />
+              <PokemonCardTypes />
+              <PokemonCardDescription>
+                {pokemonSpeciesResponse.data.flavor_text_entries[0].flavor_text}
+              </PokemonCardDescription>
+            </PokemonCardContent>
+          </PokemonCard>
         </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src='/next.svg'
-          alt='Next.js Logo'
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <div>
+          <PokemonActions pokemonId={pokemonResponse.data.id} />
+        </div>
 
-      <div className={styles.grid}>
-        <a
-          href='https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-          className={styles.card}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href='https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-          className={styles.card}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href='https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-          className={styles.card}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href='https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-          className={styles.card}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div>
+          <PokemonStatistic pokemon={pokemonResponse.data} />
+        </div>
       </div>
     </main>
   );

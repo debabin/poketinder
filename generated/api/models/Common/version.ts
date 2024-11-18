@@ -5,12 +5,12 @@ import type { NamedAPIResource } from './resource';
  * Encounters and their specifics details
  */
 export interface VersionEncounterDetail {
-  /** The game version this encounter happens in */
-  version: NamedAPIResource;
-  /** The total percentage of all encounter potential */
-  max_chance: number;
   /** A list of encounters and their specifics */
   encounter_details: Encounter[];
+  /** The total percentage of all encounter potential */
+  max_chance: number;
+  /** The game version this encounter happens in */
+  version: NamedAPIResource;
 }
 
 /**
@@ -27,10 +27,10 @@ export interface VersionGameIndex {
  * The flavor text of an API resource
  */
 export interface VersionGroupFlavorText {
-  /** The localized name for an API resource in a specific language */
-  text: string;
   /** The language this name is in */
   language: NamedAPIResource;
+  /** The localized name for an API resource in a specific language */
+  text: string;
   /** The version group which uses this flavor text */
   version_group: NamedAPIResource;
 }
