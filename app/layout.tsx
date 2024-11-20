@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import { GithubIcon, HeartIcon } from 'lucide-react';
 import Link from 'next/link';
 
@@ -13,6 +14,7 @@ import {
 } from '@/components/ui';
 import { getI18n, getMessagesByLocale } from '@/contexts/i18n/helpers';
 import { ROUTES } from '@/utils/constants';
+import { seed } from '@/utils/database/seed';
 
 import { Providers } from './providers';
 
@@ -32,7 +34,7 @@ interface RootLayoutProps {
 
 const RootLayout = async ({ children }: RootLayoutProps) => {
   const messages = getMessagesByLocale('ru');
-
+  await seed();
   // const todos = await getData();
 
   return (

@@ -1,5 +1,4 @@
 import type { GenerationGameIndex, Name, NamedAPIResource } from '../Common';
-
 import type { EncounterMethodRate, PokemonEncounter } from './encounter';
 
 /**

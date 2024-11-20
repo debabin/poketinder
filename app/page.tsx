@@ -1,6 +1,9 @@
-import type { PokemonSpecies } from '@/generated/api/models';
-import { pokeApi } from '@/utils/api/instance';
-import { getPokemon } from '@/utils/api/requests';
+import { eq } from 'drizzle-orm';
+import { cookies } from 'next/headers';
+
+import { COOKIES } from '@/utils/constants';
+import { orm } from '@/utils/database/instance';
+import { pokemonTable, statisticTable } from '@/utils/database/schema';
 import { getPokemonBackground, getRandomPokemonId } from '@/utils/helpers';
 
 import {
@@ -15,45 +18,54 @@ import {
   PokemonStatistic
 } from './(components)';
 
-
 const Home = async () => {
-  const pokemonId = getRandomPokemonId();
-  const pokemonResponse = await getPokemon({
-    params: {
-      id: pokemonId
-    }
-  });
+  const prevPokemonIdCookie = (await cookies()).get(COOKIES.PREV_POKEMON_ID);
+  const prevPokemonId = Number(prevPokemonIdCookie?.value) ?? 0;
 
-  const pokemonSpeciesResponse = await pokeApi.get<PokemonSpecies>(
-    `pokemon-species/${pokemonResponse.data.id}`
-  );
+  const statistic = (await orm.query.statisticTable.findFirst({
+    where: eq(statisticTable.pokemonId, prevPokemonId)
+  }));
+
+  const prevPokemon = (await orm.query.pokemonTable.findFirst({
+    where: eq(pokemonTable.pokemonId, prevPokemonId)
+  }))!;
+
+  const pokemonId = getRandomPokemonId();
+  const pokemon = (await orm.query.pokemonTable.findFirst({
+    where: eq(pokemonTable.pokemonId, pokemonId)
+  }))!;
+
+  console.log('@@@pokemon', pokemon, pokemonId)
 
   return (
     <main className='flex justify-center items-center h-full'>
       <div className='flex gap-4 flex-col'>
-        <div className='w-[300px]'>
-          <PokemonCard className=' h-[400px]' pokemon={pokemonResponse.data}>
+        <div className='w-[350px]'>
+          <PokemonCard className='h-[400px]' pokemon={pokemon}>
             <PokemonCardBackground
-              src={`backgrounds/bg-${getPokemonBackground(pokemonResponse.data.types[0].type.name)}.png`}
+              src={`backgrounds/bg-${getPokemonBackground(pokemon.types[0])}.png`}
             />
             <PokemonCardImage />
             <PokemonCardContent>
               <PokemonCardTitle />
               <PokemonCardTypes />
               <PokemonCardDescription>
-                {pokemonSpeciesResponse.data.flavor_text_entries[0].flavor_text}
+                {pokemon.description}
               </PokemonCardDescription>
             </PokemonCardContent>
           </PokemonCard>
         </div>
 
         <div>
-          <PokemonActions pokemonId={pokemonResponse.data.id} />
+          <PokemonActions pokemonId={pokemonId} />
         </div>
 
-        <div>
-          <PokemonStatistic pokemon={pokemonResponse.data} />
-        </div>
+        {statistic && <div>
+          <PokemonStatistic
+            pokemon={prevPokemon}
+            statistic={statistic}
+          />
+        </div>}
       </div>
     </main>
   );

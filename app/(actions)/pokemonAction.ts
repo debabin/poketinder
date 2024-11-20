@@ -2,15 +2,32 @@
 
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+
+import { COOKIES } from '@/utils/constants';
 import { orm } from '@/utils/database/instance';
 import { statisticTable } from '@/utils/database/schema';
 
-export const pokemonAction = async (id: number, action: 'pass' | 'smash') => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  const [pokemon] = await orm.select()
-    .from(statisticTable)
-    .where(eq(statisticTable.pokemonId, id));
+export const pokemonAction = async (pokemonId: number, action: 'pass' | 'smash') => {
+  const statistic = await orm.query.statisticTable.findFirst({
+    where: eq(statisticTable.pokemonId, pokemonId)
+  });
 
-  await orm.update(statisticTable).set({ [action]: pokemon[action] + 1 }).where(eq(statisticTable.pokemonId, id));
+  if (!statistic) {
+    await orm.insert(statisticTable).values({
+      pokemonId,
+      pass: 0,
+      smash: 0,
+      [action]: 1
+    });
+  } else {
+    await orm
+      .update(statisticTable)
+      .set({ [action]: statistic[action] + 1 })
+      .where(eq(statisticTable.pokemonId, pokemonId));
+  }
+
+  (await cookies()).set(COOKIES.PREV_POKEMON_ID, String(pokemonId));
+
   revalidatePath('/');
 };

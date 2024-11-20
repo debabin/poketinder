@@ -1,5 +1,4 @@
 import type { Description, Name, NamedAPIResource } from '../Common';
-
 import type { PokemonEntry } from './pokemon-entry';
 
 /**

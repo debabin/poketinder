@@ -3,9 +3,16 @@
 import { cva } from 'class-variance-authority';
 import React from 'react';
 
-import type { Pokemon } from '@/generated/api/models';
 import { Card, CardDescription, CardTitle } from '@/components/ui';
 import { cn } from '@/lib/utils';
+
+interface Pokemon {
+  description: string;
+  image: string;
+  name: string;
+  pokemonId: number;
+  types: string[];
+}
 
 interface PokemonCardContextValue {
   pokemon?: Pokemon;
@@ -14,9 +21,6 @@ interface PokemonCardContextValue {
 const PokemonCardContext = React.createContext<PokemonCardContextValue>(
   {} as PokemonCardContextValue
 );
-
-export const getPokemonImage = (pokemon: Pokemon) =>
-  pokemon.sprites.versions['generation-v']['black-white'].animated.front_default!;
 
 interface PokemonCardProps extends React.ComponentProps<'div'> {
   pokemon?: Pokemon;
@@ -57,7 +61,7 @@ PokemonCardBackground.displayName = 'PokemonCardBackground';
 const PokemonCardImage = React.forwardRef<HTMLImageElement, React.ComponentProps<'img'>>(
   ({ className, ...props }, ref) => {
     const pokemonContext = React.useContext(PokemonCardContext);
-    const src = pokemonContext.pokemon ? getPokemonImage(pokemonContext.pokemon) : props.src;
+    const src = pokemonContext.pokemon?.image ?? props.src
 
     if (!src) return null;
 
@@ -118,7 +122,7 @@ const PokemonCardDescription = React.forwardRef<
 ));
 PokemonCardDescription.displayName = 'PokemonCardDescription';
 
-export const pokemonTypesVariants = cva(
+export const pokemonTypesVariants = cva<{ type: Record<string, string> }>(
   'rounded-lg text-[10px] py-0.5 px-2 text-white capitalize font-bold',
   {
     defaultVariants: {
@@ -168,8 +172,8 @@ const PokemonCardTypes = React.forwardRef<HTMLDivElement, React.ComponentProps<'
     return (
       <div ref={ref} className={cn('flex gap-1', className)} {...props}>
         {types.map((type) => (
-          <PokemonCardType key={type.slot} className='text-white'>
-            {type.type.name}
+          <PokemonCardType key={type} className='text-white'>
+            {type}
           </PokemonCardType>
         ))}
       </div>

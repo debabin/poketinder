@@ -1,6 +1,7 @@
 'use client';
 
 import type { I18nProviderProps } from '@/contexts/i18n';
+
 import { I18nProvider } from '@/contexts/i18n';
 
 interface ProvidersProps {

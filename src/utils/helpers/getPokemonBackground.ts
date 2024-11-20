@@ -20,4 +20,4 @@ const BACKGROUND_MAP = {
 };
 
 export const getPokemonBackground = (type: string) =>
-  BACKGROUND_MAP[type][Math.floor(Math.random() * BACKGROUND_MAP[type].length)];
+  BACKGROUND_MAP[type as keyof typeof BACKGROUND_MAP][Math.floor(Math.random() * BACKGROUND_MAP[type as keyof typeof BACKGROUND_MAP].length)];
