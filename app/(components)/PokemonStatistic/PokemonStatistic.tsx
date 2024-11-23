@@ -41,6 +41,10 @@ export const PokemonStatistic = ({ pokemon, statistic }: PokemonStatisticProps) 
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
 
+    socket.on('statistic', (data) => {
+      console.log('statistic', data);
+    });
+
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);

@@ -8,9 +8,12 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
 
+let io = null;
+
 app.prepare().then(() => {
   const httpServer = createServer(handler);
-  const io = new Server(httpServer);
+  console.log('@@@io1', io);
+  io = new Server(httpServer);
 
   io.on('connection', (socket) => {
     console.log('@@@@ connection', socket.id);
@@ -23,6 +26,7 @@ app.prepare().then(() => {
       process.exit(1);
     })
     .listen(port, () => {
+      console.log('@@@io2', io);
       console.log(`> Ready on http://${hostname}:${port}`);
     });
 });

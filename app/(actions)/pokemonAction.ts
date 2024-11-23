@@ -4,11 +4,15 @@ import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
+import { getSocketInstance } from '@/server';
 import { COOKIES } from '@/utils/constants';
 import { orm } from '@/utils/database/instance';
 import { statisticTable } from '@/utils/database/schema';
 
 export const pokemonAction = async (pokemonId: number, action: 'pass' | 'smash') => {
+  const socket = getSocketInstance();
+  console.log('@@@', socket.emit('statistic', { pokemonId, action }));
+
   const statistic = await orm.query.statisticTable.findFirst({
     where: eq(statisticTable.pokemonId, pokemonId)
   });

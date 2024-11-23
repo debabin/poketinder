@@ -20,7 +20,7 @@ import {
 
 const Home = async () => {
   const prevPokemonIdCookie = (await cookies()).get(COOKIES.PREV_POKEMON_ID);
-  const prevPokemonId = Number(prevPokemonIdCookie?.value) ?? 0;
+  const prevPokemonId = Number(prevPokemonIdCookie?.value ?? 1);
 
   const statistic = (await orm.query.statisticTable.findFirst({
     where: eq(statisticTable.pokemonId, prevPokemonId)

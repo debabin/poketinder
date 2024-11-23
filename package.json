@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky",
-    "dev": "node server.mjs",
+    "dev": "bun run server.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --fix",
@@ -26,6 +26,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.3",
+    "express": "^4.21.1",
     "lucide-react": "^0.460.0",
     "next": "15.0.3",
     "pg": "^8.13.1",
@@ -41,11 +42,13 @@
   "devDependencies": {
     "@siberiacancode/eslint": "^2.5.2",
     "@siberiacancode/prettier": "^1.1.1",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.9.1",
     "@types/pg": "^8.11.10",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
+    "bun": "^1.1.36",
     "drizzle-kit": "^0.28.1",
     "eslint-plugin-drizzle": "^0.2.3",
     "husky": "^9.1.7",
@@ -53,6 +56,7 @@
     "orval": "^7.3.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },
   "lint-staged": {
