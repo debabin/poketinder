@@ -1,66 +1,26 @@
 {
-  "name": "poketinder",
-  "version": "0.1.0",
+  "name": "turbo",
   "private": true,
   "scripts": {
-    "prepare": "husky",
-    "dev": "bun run server.ts",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint . --fix",
-    "format": "prettier --write .",
-    "pretty": "yarn format && yarn lint",
-    "lint-inspector": "npx @eslint/config-inspector",
-    "database": "docker compose up --build",
-    "generate-api": "orval --config ./orval.config.ts",
-    "generate-orm": "drizzle-kit generate && drizzle-kit push"
-  },
-  "dependencies": {
-    "@radix-ui/react-navigation-menu": "^1.2.1",
-    "@radix-ui/react-slot": "^1.1.0",
-    "@siberiacancode/fetches": "^1.2.1",
-    "@siberiacancode/reactuse": "^0.0.72",
-    "@trpc/client": "^11.0.0-rc.485",
-    "@trpc/server": "^11.0.0-rc.485",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
-    "dotenv": "^16.4.5",
-    "drizzle-orm": "^0.36.3",
-    "express": "^4.21.1",
-    "lucide-react": "^0.460.0",
-    "next": "15.0.3",
-    "pg": "^8.13.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-intl": "^6.8.9",
-    "socket.io": "^4.8.1",
-    "socket.io-client": "^4.8.1",
-    "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "turbo format",
+    "pretty": "turbo pretty"
   },
   "devDependencies": {
-    "@siberiacancode/eslint": "^2.5.2",
+    "@siberiacancode/eslint": "^2.6.0",
     "@siberiacancode/prettier": "^1.1.1",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.9.1",
-    "@types/pg": "^8.11.10",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "autoprefixer": "^10.4.20",
-    "bun": "^1.1.36",
-    "drizzle-kit": "^0.28.1",
-    "eslint-plugin-drizzle": "^0.2.3",
+    "turbo": "^2.3.2",
+    "typescript": "5.5.4",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
-    "orval": "^7.3.0",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.15",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "lint-staged": "^15.2.10"
   },
-  "lint-staged": {
-    "*.js": "eslint --fix",
-    "*.ts": "eslint --fix"
-  }
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*"
+  ]
 }

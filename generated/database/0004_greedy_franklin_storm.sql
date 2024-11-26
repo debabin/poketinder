@@ -1,1 +1,0 @@
-ALTER TABLE "pokemon" RENAME COLUMN "type" TO "types";
