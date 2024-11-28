@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StatisticPokemon } from './entities';
-import { BaseService } from '@/services';
+import { BaseService } from '@/shared';
 
 @Injectable()
 export class StatisticPokemonService extends BaseService<StatisticPokemon> {

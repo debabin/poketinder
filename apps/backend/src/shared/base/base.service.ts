@@ -11,8 +11,12 @@ export class BaseService<T> {
     return await this.repository.findOne(...params);
   }
 
-  async create(data: DeepPartial<T>) {
-    return await this.repository.save(data);
+  async save(...params: Parameters<typeof this.repository.save>) {
+    return await this.repository.save(...params);
+  }
+
+  async insert(...params: Parameters<typeof this.repository.insert>) {
+    return await this.repository.insert(...params);
   }
 
   async update(...params: Parameters<typeof this.repository.update>) {

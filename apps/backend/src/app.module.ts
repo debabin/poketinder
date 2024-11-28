@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { StatisticModule } from './modules';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PokemonModule, PokemonService } from './modules/pokemon';
 
 @Module({
   imports: [
@@ -13,11 +14,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       port: 5432,
       username: 'admin',
       password: '1234',
-      database: 'pokemon'
+      database: 'pokemon',
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+      synchronize: true
     }),
-    StatisticModule
+    StatisticModule,
+    PokemonModule
   ],
   controllers: [],
-  providers: [AppService]
+  providers: [AppService, PokemonService]
 })
 export class AppModule {}

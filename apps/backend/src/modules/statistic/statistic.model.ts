@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { BaseResponse } from '@/services';
+import { BaseResponse } from '@/shared';
 
 import { StatisticPokemon } from './entities';
 

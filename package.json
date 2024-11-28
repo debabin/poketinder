@@ -14,7 +14,8 @@
     "turbo": "^2.3.2",
     "typescript": "5.5.4",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10"
+    "lint-staged": "^15.2.10",
+    "orval": "^7.3.0"
   },
   "engines": {
     "node": ">=18"
