@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type RegionListParams = {
-limit?: number;
-offset?: number;
-};
+export interface RegionListParams {
+  limit?: number;
+  offset?: number;
+}

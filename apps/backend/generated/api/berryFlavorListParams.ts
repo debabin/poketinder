@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type BerryFlavorListParams = {
-limit?: number;
-offset?: number;
-};
+export interface BerryFlavorListParams {
+  limit?: number;
+  offset?: number;
+}

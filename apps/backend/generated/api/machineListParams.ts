@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type MachineListParams = {
-limit?: number;
-offset?: number;
-};
+export interface MachineListParams {
+  limit?: number;
+  offset?: number;
+}

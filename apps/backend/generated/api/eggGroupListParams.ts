@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type EggGroupListParams = {
-limit?: number;
-offset?: number;
-};
+export interface EggGroupListParams {
+  limit?: number;
+  offset?: number;
+}

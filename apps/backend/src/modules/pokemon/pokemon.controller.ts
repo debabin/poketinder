@@ -1,8 +1,11 @@
-import { BaseResolver } from '@/shared';
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { PokemonResponse, PokemonsResponse } from './pokemon.model';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { BaseResolver } from '@/shared';
+
 import { PokemonService } from './pokemon.service';
+
+import { PokemonResponse, PokemonsResponse } from './pokemon.model';
 
 @ApiTags('pokemon')
 @Controller('/pokemon')

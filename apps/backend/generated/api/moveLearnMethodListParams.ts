@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type MoveLearnMethodListParams = {
-limit?: number;
-offset?: number;
-};
+export interface MoveLearnMethodListParams {
+  limit?: number;
+  offset?: number;
+}

@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type GrowthRateListParams = {
-limit?: number;
-offset?: number;
-};
+export interface GrowthRateListParams {
+  limit?: number;
+  offset?: number;
+}

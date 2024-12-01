@@ -1,4 +1,4 @@
-import { DeepPartial, Repository } from 'typeorm';
+import type { Repository } from 'typeorm';
 
 export class BaseService<T> {
   constructor(private repository: Repository<T>) {}

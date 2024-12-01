@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type MoveTargetListParams = {
-limit?: number;
-offset?: number;
-};
+export interface MoveTargetListParams {
+  limit?: number;
+  offset?: number;
+}

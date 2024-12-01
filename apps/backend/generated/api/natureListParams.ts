@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type NatureListParams = {
-limit?: number;
-offset?: number;
-};
+export interface NatureListParams {
+  limit?: number;
+  offset?: number;
+}

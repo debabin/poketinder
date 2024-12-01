@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type PalParkAreaListParams = {
-limit?: number;
-offset?: number;
-};
+export interface PalParkAreaListParams {
+  limit?: number;
+  offset?: number;
+}

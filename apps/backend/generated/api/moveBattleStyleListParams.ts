@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type MoveBattleStyleListParams = {
-limit?: number;
-offset?: number;
-};
+export interface MoveBattleStyleListParams {
+  limit?: number;
+  offset?: number;
+}

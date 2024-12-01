@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type LocationAreaListParams = {
-limit?: number;
-offset?: number;
-};
+export interface LocationAreaListParams {
+  limit?: number;
+  offset?: number;
+}

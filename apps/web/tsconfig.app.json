@@ -12,7 +12,8 @@
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/generated/*": ["./generated/*"]
     },
     "allowImportingTsExtensions": true,
 
@@ -25,5 +26,5 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src", "@types"]
 }

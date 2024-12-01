@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type EncounterConditionListParams = {
-limit?: number;
-offset?: number;
-};
+export interface EncounterConditionListParams {
+  limit?: number;
+  offset?: number;
+}

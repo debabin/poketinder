@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
+    "@siberiacancode/reactuse": "^0.0.73",
     "@tanstack/react-query": "^5.61.5",
+    "@tanstack/react-query-devtools": "^5.62.0",
     "@tanstack/react-router": "^1.84.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

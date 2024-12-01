@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type AbilityListParams = {
-limit?: number;
-offset?: number;
-};
+export interface AbilityListParams {
+  limit?: number;
+  offset?: number;
+}

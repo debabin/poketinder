@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type PokemonListParams = {
-limit?: number;
-offset?: number;
-};
+export interface PokemonListParams {
+  limit?: number;
+  offset?: number;
+}

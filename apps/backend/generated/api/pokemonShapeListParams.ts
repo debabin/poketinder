@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type PokemonShapeListParams = {
-limit?: number;
-offset?: number;
-};
+export interface PokemonShapeListParams {
+  limit?: number;
+  offset?: number;
+}

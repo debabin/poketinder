@@ -1,6 +1,10 @@
-import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import type { OnApplicationBootstrap } from '@nestjs/common';
+
+import { Injectable } from '@nestjs/common';
+
 import { PokemonService } from '@/modules/pokemon';
-import { getPokemon, getPokemonSpecies, getPokemons } from '@/utils/api/requests';
+
+import { getPokemon, getPokemons, getPokemonSpecies } from '@/utils/api/requests';
 
 const MAX_POKEMON_COUNTS = 10;
 

@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type ItemListParams = {
-limit?: number;
-offset?: number;
-};
+export interface ItemListParams {
+  limit?: number;
+  offset?: number;
+}

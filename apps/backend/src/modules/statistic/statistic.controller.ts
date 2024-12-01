@@ -1,8 +1,11 @@
-import { BaseResolver } from '@/shared';
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { StatisticPokemonResponse } from './statistic.model';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { BaseResolver } from '@/shared';
+
 import { StatisticPokemonService } from './statistic.service';
+
+import { StatisticPokemonResponse } from './statistic.model';
 
 @ApiTags('statistic')
 @Controller('/statistic')

@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type VersionGroupListParams = {
-limit?: number;
-offset?: number;
-};
+export interface VersionGroupListParams {
+  limit?: number;
+  offset?: number;
+}

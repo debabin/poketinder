@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type GenerationListParams = {
-limit?: number;
-offset?: number;
-};
+export interface GenerationListParams {
+  limit?: number;
+  offset?: number;
+}

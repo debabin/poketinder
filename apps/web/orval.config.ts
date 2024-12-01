@@ -1,8 +1,8 @@
 export default {
   pokemon: {
-    input: "http://localhost:3000/api-json",
+    input: 'http://localhost:3000/api-json',
     output: {
-      schemas: "generated/api",
-    },
-  },
+      schemas: 'generated/api'
+    }
+  }
 };

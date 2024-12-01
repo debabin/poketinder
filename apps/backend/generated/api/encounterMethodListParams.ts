@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type EncounterMethodListParams = {
-limit?: number;
-offset?: number;
-};
+export interface EncounterMethodListParams {
+  limit?: number;
+  offset?: number;
+}

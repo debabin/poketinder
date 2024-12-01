@@ -4,7 +4,7 @@
  * OpenAPI spec version: 20220523
  */
 
-export type SuperContestEffectListParams = {
-limit?: number;
-offset?: number;
-};
+export interface SuperContestEffectListParams {
+  limit?: number;
+  offset?: number;
+}
