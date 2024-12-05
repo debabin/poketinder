@@ -1,1 +1,3 @@
-export * from './useGetPokemonSuspenseQuery';
+export * from './useGetPokemonQuery';
+export * from './useGetStatisticQuery';
+export * from './usePostActionPokemonMutation';

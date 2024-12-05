@@ -5,6 +5,8 @@
  * OpenAPI spec version: 1.0
  */
 
+export * from './actionPokemonDto';
+export * from './baseResponse';
 export * from './pokemon';
 export * from './pokemonResponse';
 export * from './pokemonsResponse';

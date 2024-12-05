@@ -10,5 +10,5 @@ export interface GetStatisticParams {
 
 export type GetStatisticRequestConfig = FetchesRequestConfig<GetStatisticParams>;
 
-export const getStatisticPokemon = ({ config, params }: GetStatisticRequestConfig) =>
+export const getStatistic = ({ config, params }: GetStatisticRequestConfig) =>
   api.get<StatisticPokemonResponse>(`statistic/${params.pokemonId}`, config);

@@ -68,7 +68,7 @@ const PokemonCardImage = React.forwardRef<HTMLImageElement, React.ComponentProps
         <img
           ref={ref}
           alt='pokemon'
-          className={cn('min-h-52 min-w-52 select-none', className)}
+          className={cn('min-h-64 min-w-64 select-none', className)}
           src={src}
           style={{ imageRendering: 'pixelated' }}
           {...props}
@@ -84,7 +84,7 @@ const PokemonCardContent = React.forwardRef<HTMLDivElement, React.ComponentProps
     <div
       ref={ref}
       className={cn(
-        'flex flex-col gap-2 absolute bottom-0 p-3 bg-gradient-to-b from-black/0 to-black/60 rounded-lg w-full',
+        'flex flex-col gap-2 absolute bottom-0 p-3 bg-gradient-to-b from-black/0 to-black/70 rounded-lg w-full',
         className
       )}
       {...props}
@@ -101,7 +101,11 @@ const PokemonCardTitle = React.forwardRef<
   const title = pokemonContext.pokemon?.name ?? props.children;
 
   return (
-    <CardTitle ref={ref} className={cn('text-white capitalize mb-1', className)} {...props}>
+    <CardTitle
+      ref={ref}
+      className={cn('text-white text-3xl capitalize mb-1', className)}
+      {...props}
+    >
       {title}
     </CardTitle>
   );

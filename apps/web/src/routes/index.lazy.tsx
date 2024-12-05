@@ -1,5 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { Heart, Trash } from 'lucide-react';
+import { motion } from 'motion/react';
 
 import {
   Button,
@@ -9,12 +10,13 @@ import {
   PokemonCardDescription,
   PokemonCardImage,
   PokemonCardTitle,
-  PokemonCardTypes
+  PokemonCardTypes,
+  Skeleton,
+  Spinner
 } from '@/components/ui';
-import { ROUTES } from '@/utils';
 import { getPokemonBackground } from '@/utils/helpers/pokemon';
 
-import { PokemonStatistic } from './-component/PokemonStatistic/PokemonStatistic';
+import { PokemonStatistic } from './-component';
 import { useMainPage } from './-hooks/useMainPage';
 
 const MainPage = () => {
@@ -23,26 +25,92 @@ const MainPage = () => {
   return (
     <main className='flex justify-center items-center h-full'>
       <div className='flex gap-4 flex-col'>
-        {state.pokemon && (
-          <div className='w-[350px]'>
-            <PokemonCard className='h-[400px]' pokemon={state.pokemon}>
-              <PokemonCardBackground
-                src={`backgrounds/bg-${getPokemonBackground(state.pokemon.types[0])}.png`}
-              />
-              <PokemonCardImage />
-              <PokemonCardContent className='text-left'>
-                <PokemonCardTitle />
-                <PokemonCardTypes />
-                <PokemonCardDescription>{state.pokemon.description}</PokemonCardDescription>
-              </PokemonCardContent>
-            </PokemonCard>
-          </div>
-        )}
+        <motion.div
+          drag
+          dragElastic={{
+            top: 0.2,
+            bottom: 0.2,
+            right: 0.5,
+            left: 0.5
+          }}
+          style={{
+            x: state.card.x,
+            rotate: state.card.rotate
+          }}
+          whileDrag={{
+            scale: 1.05
+          }}
+          animate={state.card.controls}
+          className='w-[350px]'
+          dragConstraints={{
+            left: 0,
+            bottom: 0,
+            top: 0,
+            right: 0
+          }}
+          onDragEnd={(_event, info) => {
+            if (state.pending.action || state.loading.pokemon) return;
+            if (info.offset.x > -300 && info.offset.x < 300) return;
+            const action = info.offset.x > 0 ? 'smash' : 'pass';
+            functions.onCardDragEnd(action);
+          }}
+        >
+          <motion.div
+            style={{
+              opacity: state.card.opacity
+            }}
+          >
+            {!state.pokemon && (
+              <div className='relative h-[450px] bg-gray-100 rounded-lg overflow-hidden'>
+                <div className='absolute h-full w-full left-0 top-0 flex justify-center items-center'>
+                  <Spinner className='stroke-gray-300 size-12' />
+                </div>
+
+                <div className='absolute bottom-0 left-0 right-0 z-30 p-4 w-full'>
+                  <Skeleton className='h-10 w-1/2 mb-2' />
+                  <div className='flex gap-2'>
+                    <Skeleton className='h-4 w-12' />
+                    <Skeleton className='h-4 w-12' />
+                  </div>
+                  <Skeleton className='h-8 w-full mt-4' />
+                </div>
+              </div>
+            )}
+            {state.pokemon && (
+              <PokemonCard className='h-[450px]' pokemon={state.pokemon}>
+                <PokemonCardBackground
+                  src={`backgrounds/bg-${getPokemonBackground(state.pokemon.types[0])}.png`}
+                />
+                <div className='absolute bottom-0 top-0 right-0 left-0 z-50' />
+                <PokemonCardImage />
+                <PokemonCardContent className='text-left'>
+                  <PokemonCardTitle className='text-5xl' />
+                  <PokemonCardTypes />
+                  <PokemonCardDescription>{state.pokemon.description}</PokemonCardDescription>
+                </PokemonCardContent>
+              </PokemonCard>
+            )}
+          </motion.div>
+
+          <motion.div
+            className='flex items-center justify-center size-16 rounded-full shadow-md absolute bottom-[-20px] right-0 left-0 m-auto'
+            style={{ background: state.card.color, opacity: state.card.like }}
+          >
+            <Heart className='text-white size-8' />
+          </motion.div>
+
+          <motion.div
+            className='flex items-center justify-center size-16 rounded-full shadow-md absolute bottom-[-20px] right-0 left-0 m-auto'
+            style={{ background: state.card.color, opacity: state.card.trash }}
+          >
+            <Trash className='text-white size-8' />
+          </motion.div>
+        </motion.div>
 
         <div className='flex gap-2'>
           <Button
             className='w-full hover:bg-red-100'
-            disabled={false}
+            disabled={state.pending.action || state.loading.pokemon}
             variant='outline'
             onClick={() => functions.onActionClick('pass')}
           >
@@ -51,7 +119,7 @@ const MainPage = () => {
           </Button>
           <Button
             className='w-full hover:bg-green-100'
-            disabled={false}
+            disabled={state.pending.action || state.loading.pokemon}
             variant='outline'
             onClick={() => functions.onActionClick('smash')}
           >
@@ -60,14 +128,12 @@ const MainPage = () => {
           </Button>
         </div>
 
-        {state.statistic && (
-          <PokemonStatistic statistic={state.statistic} pokemon={state.pokemon} />
-        )}
+        <PokemonStatistic />
       </div>
     </main>
   );
 };
 
-export const Route = createLazyFileRoute(ROUTES.MAIN)({
+export const Route = createLazyFileRoute('/')({
   component: MainPage
 });
