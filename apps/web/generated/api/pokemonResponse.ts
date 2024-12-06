@@ -7,13 +7,13 @@
 import type { Pokemon } from './pokemon';
 
 export interface PokemonResponse {
-  /** Покемон */
+  /** Pokemon */
   pokemon: Pokemon;
   /**
-   * Причина ошибки
+   * Error reason
    * @nullable
    */
   reason?: string | null;
-  /** Статус запроса */
+  /** Request status */
   success: boolean;
 }

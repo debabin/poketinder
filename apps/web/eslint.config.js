@@ -21,5 +21,9 @@ export default eslint(
     },
     name: 'tanstack-router',
     ...pluginTanstackRouter.configs.recomended
+  },
+  {
+    name: 'poketinder/generated',
+    ignores: ['generated']
   }
 );

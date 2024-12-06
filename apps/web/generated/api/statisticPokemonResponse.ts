@@ -8,12 +8,12 @@ import type { StatisticPokemon } from './statisticPokemon';
 
 export interface StatisticPokemonResponse {
   /**
-   * Причина ошибки
+   * Error reason
    * @nullable
    */
   reason?: string | null;
   /** Статистика покемона */
   statistic: StatisticPokemon;
-  /** Статус запроса */
+  /** Request status */
   success: boolean;
 }

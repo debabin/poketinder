@@ -7,10 +7,10 @@
 
 export interface BaseResponse {
   /**
-   * Причина ошибки
+   * Error reason
    * @nullable
    */
   reason?: string | null;
-  /** Статус запроса */
+  /** Request status */
   success: boolean;
 }

@@ -46,28 +46,28 @@ export class StatisticController extends BaseResolver {
     type: BaseResponse
   })
   async actionPokemonStatistic(
-    @Body() actionPokemonStatisticDto: { pokemonId: number, action: 'pass' | 'smash' }
+    @Body() actionPokemonStatisticDto: { pokemonId: number; action: 'pass' | 'smash' }
   ): Promise<BaseResponse> {
     const existedStatistic = await this.statisticPokemonService.findOne({
       where: { pokemonId: Number(actionPokemonStatisticDto.pokemonId) }
     });
-  
+
     if (!existedStatistic) {
       await this.statisticPokemonService.insert({
         pokemonId: actionPokemonStatisticDto.pokemonId,
         pass: 0,
         smash: 0,
         [actionPokemonStatisticDto.action]: 1
-      })
-      
+      });
+
       return this.wrapSuccess();
     } else {
       await this.statisticPokemonService.save({
         ...existedStatistic,
         [actionPokemonStatisticDto.action]: existedStatistic[actionPokemonStatisticDto.action] + 1
-      })
+      });
 
-       return this.wrapSuccess();
+      return this.wrapSuccess();
     }
   }
 }

@@ -4,16 +4,16 @@
  * Poketinder
  * OpenAPI spec version: 1.0
  */
-import type { Pokemon } from './pokemon';
+import type { PaginationPokemonsResponse } from './paginationPokemonsResponse';
 
 export interface PokemonsResponse {
-  /** Покемоны */
-  pokemons: Pokemon[];
   /**
-   * Причина ошибки
+   * Error reason
    * @nullable
    */
   reason?: string | null;
-  /** Статус запроса */
+  /** Pokemons with pagination */
+  response: PaginationPokemonsResponse;
+  /** Request status */
   success: boolean;
 }

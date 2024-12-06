@@ -22,3 +22,16 @@ interface QuerySettings<Func = unknown> {
     'queryKey'
   >;
 }
+
+interface InfinityQuerySettings<Func = unknown> {
+  config?: ApiRequestOptions;
+  options?: Omit<
+    import('@tanstack/react-query').UseInfiniteQueryOptions<
+      import('@tanstack/react-query').InfiniteData<Awaited<ReturnType<Func>>>,
+      any,
+      import('@tanstack/react-query').InfiniteData<Awaited<ReturnType<Func>>>,
+      any
+    >,
+    'queryKey'
+  >;
+}

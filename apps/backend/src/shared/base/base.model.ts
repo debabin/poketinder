@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class BaseResponse {
-  @ApiProperty({ description: 'Статус запроса' })
+  @ApiProperty({ description: 'Request status' })
   success!: boolean;
 
-  @ApiProperty({ description: 'Причина ошибки', nullable: true, required: false })
+  @ApiProperty({ description: 'Error reason', nullable: true, required: false })
   reason?: string;
 }

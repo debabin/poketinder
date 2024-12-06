@@ -6,8 +6,8 @@
  */
 
 export interface ActionPokemonDto {
-  /** User action */
+  /** User action (either "pass" or "smash") */
   action: string;
-  /** Pokemon id */
+  /** Pokemon ID (must be a positive integer) */
   pokemonId: number;
 }
