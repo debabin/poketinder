@@ -6,20 +6,20 @@
  */
 
 export type PokemonControllerGetPokemonsParams = {
-  /**
-   * Number of pokemons to return per page
-   */
-  limit?: number;
-  /**
-   * Number of pokemons to skip
-   */
-  offset: number;
-  /**
-   * Filter pokemons by name
-   */
-  name?: string;
-  /**
-   * Filter pokemons by type
-   */
-  types?: string[];
+/**
+ * Number of pokemons to return per page
+ */
+limit: number;
+/**
+ * Number of pokemons to skip
+ */
+offset: number;
+/**
+ * Filter pokemons by name
+ */
+name?: string;
+/**
+ * Filter pokemons by type
+ */
+types?: string[];
 };

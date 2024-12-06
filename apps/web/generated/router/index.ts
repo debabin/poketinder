@@ -8,92 +8,96 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from './../../src/routes/__root';
-import { Route as StatsIndexImport } from './../../src/routes/stats/index';
+import { Route as rootRoute } from './../../src/routes/__root'
+import { Route as StatsIndexImport } from './../../src/routes/stats/index'
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')();
+const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute
-} as any).lazy(() => import('./../../src/routes/index.lazy').then((d) => d.Route));
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./../../src/routes/index.lazy').then((d) => d.Route),
+)
 
 const StatsIndexRoute = StatsIndexImport.update({
   id: '/stats/',
   path: '/stats/',
-  getParentRoute: () => rootRoute
-} as any).lazy(() => import('./../../src/routes/stats/index.lazy').then((d) => d.Route));
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./../../src/routes/stats/index.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexLazyImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/stats/': {
-      id: '/stats/';
-      path: '/stats';
-      fullPath: '/stats';
-      preLoaderRoute: typeof StatsIndexImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/stats/'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof StatsIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute;
-  '/stats': typeof StatsIndexRoute;
+  '/': typeof IndexLazyRoute
+  '/stats': typeof StatsIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute;
-  '/stats': typeof StatsIndexRoute;
+  '/': typeof IndexLazyRoute
+  '/stats': typeof StatsIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  '/': typeof IndexLazyRoute;
-  '/stats/': typeof StatsIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexLazyRoute
+  '/stats/': typeof StatsIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/stats';
-  fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/stats';
-  id: '__root__' | '/' | '/stats/';
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/stats'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/stats'
+  id: '__root__' | '/' | '/stats/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute;
-  StatsIndexRoute: typeof StatsIndexRoute;
+  IndexLazyRoute: typeof IndexLazyRoute
+  StatsIndexRoute: typeof StatsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  StatsIndexRoute: StatsIndexRoute
-};
+  StatsIndexRoute: StatsIndexRoute,
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {

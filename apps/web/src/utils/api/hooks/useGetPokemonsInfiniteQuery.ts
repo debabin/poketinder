@@ -9,16 +9,16 @@ export const useGetPokemonsInfiniteQuery = (
   settings?: InfinityQuerySettings<typeof getPokemons>
 ) =>
   useInfiniteQuery({
-    initialPageParam: 1,
+    initialPageParam: 0,
     queryKey: ['getPokemons', ...Object.values(params)],
-    queryFn: ({ pageParam = 1 }) =>
+    queryFn: ({ pageParam }) =>
       getPokemons({
-        params: { ...params, offset: params.offset * (pageParam as number) },
+        params: { ...params, offset: params.offset + (pageParam as number) * params.limit },
         config: settings?.config
       }),
     getNextPageParam: (lastPage) => {
       if (lastPage && lastPage.data.response.next) {
-        return lastPage.data.response.page + 1;
+        return lastPage.data.response.page;
       }
       return undefined;
     },
