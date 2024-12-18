@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { StatisticPokemon } from './entities';
+import { Pokemon, PokemonService} from '@/modules/pokemon';
+
+import { Statistic } from './entities';
 import { StatisticController } from './statistic.controller';
-import { StatisticPokemonService } from './statistic.service';
+import { StatisticService } from './statistic.service';
 
 @Module({
   controllers: [StatisticController],
-  imports: [TypeOrmModule.forFeature([StatisticPokemon])],
+  imports: [TypeOrmModule.forFeature([Statistic, Pokemon])],
   exports: [TypeOrmModule],
-  providers: [StatisticPokemonService]
+  providers: [StatisticService, PokemonService]
 })
 export class StatisticModule {}

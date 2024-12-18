@@ -1,10 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { BaseResponse } from '@/shared';
+import { BaseResponse, PaginationResponse } from '@/shared';
 
-import { StatisticPokemon } from './entities';
+import { PokemonStatistic, Statistic } from './entities';
 
-export class StatisticPokemonResponse extends BaseResponse {
-  @ApiProperty({ description: 'Статистика покемона', type: StatisticPokemon })
-  statistic: StatisticPokemon;
+export class PokemonStatisticResponse extends BaseResponse {
+  @ApiProperty({ description: 'Statistic', type: Statistic })
+  statistic: Statistic;
 }
+
+export class PaginationStatisticPokemonsResponse extends PaginationResponse {
+  @ApiProperty({ description: 'Pokemon statistic', type: [PokemonStatistic] })
+  pokemons: PokemonStatistic[];
+}
+
+export class StatisticPokemonsResponse extends BaseResponse {
+  @ApiProperty({ description: 'Pokemons with pagination', type: PaginationStatisticPokemonsResponse })
+  response: PaginationStatisticPokemonsResponse;
+}
+

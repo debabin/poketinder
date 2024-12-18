@@ -2,11 +2,11 @@ import type { OnApplicationBootstrap } from '@nestjs/common';
 
 import { Injectable } from '@nestjs/common';
 
-import { PokemonService } from '@/modules/pokemon';
+import type { PokemonService } from '@/modules/pokemon';
 
 import { getPokemon, getPokemons, getPokemonSpecies } from '@/utils/api/requests';
 
-const MAX_POKEMON_COUNTS = 10;
+const MAX_POKEMON_COUNTS = 50;
 
 @Injectable()
 export class AppService implements OnApplicationBootstrap {
@@ -14,8 +14,13 @@ export class AppService implements OnApplicationBootstrap {
 
   async onApplicationBootstrap() {
     const pokemons = await this.pokemonService.findAll();
-    console.log('pokemons seed:', pokemons.length, 'already injected');
-    if (pokemons.length) return;
+
+    if (pokemons.length >= MAX_POKEMON_COUNTS) {
+      console.log('pokemons seed:', pokemons.length, 'already injected');
+      return
+    };
+
+    await this.pokemonService.clear()
 
     const pokemonsResponse = await getPokemons({
       params: { limit: MAX_POKEMON_COUNTS, offset: 0 }

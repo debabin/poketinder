@@ -1,26 +1,27 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
-import { Fragment } from 'react';
 
-import { useStatsPage } from './-hooks/useStatsPage';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui';
 
-const StatsPage = () => {
-  const { state } = useStatsPage();
+import { StatisticListTab } from './-components';
 
-  return (
-    <main className='flex justify-center items-center h-full'>
-      {state.pages.map((response, index) => (
-        <Fragment key={index}>
-          {response.data.response.pokemons.map((pokemon) => (
-            <div key={pokemon.id}>
-              <img alt={pokemon.name} src={pokemon.image} />
-            </div>
-          ))}
-        </Fragment>
-      ))}
+const StatsPage = () =>  (
+    <main className='container max-w-[1000px] m-auto'>
+      <h1 className='text-5xl font-light text-left mb-8'>Statistic page</h1>
+      <Tabs defaultValue='stats'>
+        <div className='flex justify-start'>
+          <TabsList className='mb-2'>
+            <TabsTrigger value='top-10'>🏆 Top 10 pokemons</TabsTrigger>
+            <TabsTrigger value='stats'>📊 Statistic list</TabsTrigger>
+          </TabsList>
+        </div>
+        <TabsContent value='top-10'>top 10 here</TabsContent>
+        <TabsContent value='stats'>
+          <StatisticListTab />
+        </TabsContent>
+      </Tabs>
     </main>
   );
-};
-
+  
 export const Route = createLazyFileRoute('/stats/')({
   component: StatsPage
 });

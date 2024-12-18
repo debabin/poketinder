@@ -157,14 +157,14 @@ export interface PokemonCardTypeProps extends React.ComponentProps<'div'> {
   children: string;
 }
 
-const PokemonCardType = React.forwardRef<HTMLDivElement, PokemonCardTypeProps>(
+const PokemonType = React.forwardRef<HTMLDivElement, PokemonCardTypeProps>(
   ({ children, className, ...props }, ref) => (
     <div ref={ref} className={cn(pokemonTypesVariants({ className, type: children }))} {...props}>
       {children}
     </div>
   )
 );
-PokemonCardType.displayName = 'PokemonCardType';
+PokemonType.displayName = 'PokemonCardType';
 
 const PokemonCardTypes = React.forwardRef<HTMLDivElement, React.ComponentProps<'div'>>(
   ({ className, ...props }, ref) => {
@@ -174,9 +174,9 @@ const PokemonCardTypes = React.forwardRef<HTMLDivElement, React.ComponentProps<'
     return (
       <div ref={ref} className={cn('flex gap-1', className)} {...props}>
         {types.map((type) => (
-          <PokemonCardType key={type} className='text-white'>
+          <PokemonType key={type} className='text-white'>
             {type}
-          </PokemonCardType>
+          </PokemonType>
         ))}
       </div>
     );
@@ -191,6 +191,6 @@ export {
   PokemonCardDescription,
   PokemonCardImage,
   PokemonCardTitle,
-  PokemonCardType,
-  PokemonCardTypes
+  PokemonCardTypes,
+  PokemonType
 };

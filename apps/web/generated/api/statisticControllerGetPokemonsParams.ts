@@ -4,12 +4,13 @@
  * Poketinder
  * OpenAPI spec version: 1.0
  */
+import type { StatisticControllerGetPokemonsRaiting } from './statisticControllerGetPokemonsRaiting';
 
-export type PokemonControllerGetPokemonsParams = {
+export type StatisticControllerGetPokemonsParams = {
 /**
  * Number of pokemons to return per page
  */
-limit: number;
+limit?: number;
 /**
  * Number of pokemons to skip
  */
@@ -22,4 +23,8 @@ name?: string;
  * Filter pokemons by type
  */
 types?: string[];
+/**
+ * Filter pokemons by raiting type (smash or pass)
+ */
+raiting?: StatisticControllerGetPokemonsRaiting;
 };

@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 
-import type { Pokemon, StatisticPokemon } from '@/generated/api';
+import type { Pokemon, Statistic } from '@/generated/api';
 
 import {
   PokemonCard,
   PokemonCardBackground,
   PokemonCardImage,
+  PokemonStatisticLine,
   pokemonTypesVariants
 } from '@/components/ui';
 import { cn } from '@/lib/utils';
@@ -13,7 +14,7 @@ import { getPokemonBackground } from '@/utils/helpers';
 
 interface PokemonStatisticContentProps {
   pokemon: Pokemon;
-  statistic: StatisticPokemon;
+  statistic: Statistic;
 }
 
 export const PokemonStatisticContent = ({ statistic, pokemon }: PokemonStatisticContentProps) => {
@@ -29,9 +30,9 @@ export const PokemonStatisticContent = ({ statistic, pokemon }: PokemonStatistic
       <div className='flex gap-2 justify-center'>
         <div className='flex flex-col gap-1 items-end w-full'>
           <div>Passes</div>
-          <div
-            className='h-6 bg-red-300 rounded-md transition-all ease-in duration-300'
+          <PokemonStatisticLine
             style={{ width: `${(statistic.pass / total) * 100}%` }}
+            action='pass'
           />
           <div>{statistic.pass}</div>
         </div>
@@ -41,9 +42,9 @@ export const PokemonStatisticContent = ({ statistic, pokemon }: PokemonStatistic
         </PokemonCard>
         <div className='flex flex-col gap-1 items-start w-full'>
           <div>Smashes</div>
-          <div
-            className='h-6 bg-green-300 rounded-md transition-all ease-in duration-300'
+          <PokemonStatisticLine
             style={{ width: `${(statistic.smash / total) * 100}%` }}
+            action='smash'
           />
           <div>{statistic.smash}</div>
         </div>

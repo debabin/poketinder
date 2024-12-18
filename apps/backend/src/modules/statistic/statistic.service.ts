@@ -5,14 +5,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { BaseService } from '@/shared';
 
-import { StatisticPokemon } from './entities';
+import { Statistic } from './entities';
 
 @Injectable()
-export class StatisticPokemonService extends BaseService<StatisticPokemon> {
+export class StatisticService extends BaseService<Statistic> {
   constructor(
-    @InjectRepository(StatisticPokemon)
-    private readonly StatisticPokemonRepository: Repository<StatisticPokemon>
+    @InjectRepository(Statistic)
+    private readonly StatisticRepository: Repository<Statistic>
   ) {
-    super(StatisticPokemonRepository);
+    super(StatisticRepository);
   }
 }

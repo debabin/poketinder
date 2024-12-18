@@ -5,13 +5,13 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface StatisticPokemon {
+export interface Statistic {
   /** Уникальный идентификатор статистики */
   id: string;
-  /** Дизлайки */
+  /** Passes */
   pass: number;
   /** Идентификатор покемона */
   pokemonId: number;
-  /** Лайки */
+  /** Smashes */
   smash: number;
 }

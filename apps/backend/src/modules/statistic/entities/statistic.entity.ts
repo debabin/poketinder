@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-export class StatisticPokemon {
+@Entity('statistic')
+export class Statistic {
   @PrimaryGeneratedColumn('uuid')
   @ApiProperty({
     description: 'Уникальный идентификатор статистики',
@@ -15,10 +15,10 @@ export class StatisticPokemon {
   pokemonId: number;
 
   @Column({ type: 'int', default: 0, nullable: false })
-  @ApiProperty({ description: 'Лайки', example: 12 })
+  @ApiProperty({ description: 'Smashes', example: 12 })
   smash: number;
 
   @Column({ type: 'int', default: 0, nullable: false })
-  @ApiProperty({ description: 'Дизлайки', example: 7 })
+  @ApiProperty({ description: 'Passes', example: 7 })
   pass: number;
 }

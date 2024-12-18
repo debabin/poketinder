@@ -1,11 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import type { GetPokemonsParams } from '../requests';
+import type { GetStatisticPokemonsParams } from '../requests';
 
 import { getPokemons } from '../requests';
 
-export const useGetPokemonsInfiniteQuery = (
-  params: GetPokemonsParams,
+export const useGetStatisticPokemonsInfiniteQuery = (
+  params: GetStatisticPokemonsParams,
   settings?: InfinityQuerySettings<typeof getPokemons>
 ) =>
   useInfiniteQuery({

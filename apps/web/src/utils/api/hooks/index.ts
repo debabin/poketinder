@@ -1,4 +1,4 @@
 export * from './useGetPokemonQuery';
-export * from './useGetPokemonsInfiniteQuery';
+export * from './useGetStatisticPokemonsInfiniteQuery';
 export * from './useGetStatisticQuery';
 export * from './usePostActionPokemonMutation';

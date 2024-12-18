@@ -27,6 +27,10 @@ export class BaseService<T> {
     return await this.repository.delete(...params);
   }
 
+  async clear(...params: Parameters<typeof this.repository.clear>) {
+    return await this.repository.clear(...params);
+  }
+
   async createQueryBuilder(...params: Parameters<typeof this.repository.createQueryBuilder>) {
     return await this.repository.createQueryBuilder(...params);
   }

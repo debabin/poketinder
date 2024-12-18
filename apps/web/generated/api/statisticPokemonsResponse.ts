@@ -4,16 +4,16 @@
  * Poketinder
  * OpenAPI spec version: 1.0
  */
-import type { Statistic } from './statistic';
+import type { PaginationStatisticPokemonsResponse } from './paginationStatisticPokemonsResponse';
 
-export interface StatisticPokemonResponse {
+export interface StatisticPokemonsResponse {
   /**
    * Error reason
    * @nullable
    */
   reason?: string | null;
-  /** Statistic */
-  statistic: Statistic;
+  /** Pokemons with pagination */
+  response: PaginationStatisticPokemonsResponse;
   /** Request status */
   success: boolean;
 }

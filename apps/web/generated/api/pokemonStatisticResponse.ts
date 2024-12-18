@@ -6,7 +6,7 @@
  */
 import type { Statistic } from './statistic';
 
-export interface StatisticPokemonResponse {
+export interface PokemonStatisticResponse {
   /**
    * Error reason
    * @nullable

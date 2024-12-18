@@ -1,3 +1,4 @@
+import { useDidUpdate, useLocalStorage } from '@siberiacancode/reactuse';
 import { keepPreviousData } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -7,8 +8,9 @@ import { getRandomPokemonId } from '@/utils/helpers';
 
 import { useAnimationCard } from './useAnimationCard';
 
-export const useMainPage = () => {
+export const usePokemonSwiper = () => {
   const animationCard = useAnimationCard();
+  const prevPokemonIdStorage = useLocalStorage<number>(LOCAL_STORAGE_KEYS.PREV_POKEMON_ID);
 
   const [randomPokemonId, setRandomPokemonId] = useState(getRandomPokemonId);
   const getPokemonQuery = useGetPokemonQuery(
@@ -20,34 +22,25 @@ export const useMainPage = () => {
     }
   );
 
+  useDidUpdate(() => {
+    if (!getPokemonQuery.dataUpdatedAt) return;
+    animationCard.controls.start({
+      y: 0,
+      opacity: 1
+    });
+  }, [getPokemonQuery.dataUpdatedAt]);
+
   const postStatisticActionMutation = usePostStatisticActionMutation();
 
   const pokemonAction = async (action: 'pass' | 'smash') => {
     await postStatisticActionMutation.mutateAsync({
       params: { pokemonId: randomPokemonId, action }
     });
-    localStorage.setItem(LOCAL_STORAGE_KEYS.PREV_POKEMON_ID, randomPokemonId.toString());
+    prevPokemonIdStorage.set(randomPokemonId);
     setRandomPokemonId(getRandomPokemonId());
   };
 
-  const onCardDragEnd = async (action: 'pass' | 'smash') => {
-    await animationCard.controls.start({
-      x: action === 'pass' ? -500 : 500,
-      rotate: 45,
-      opacity: 0,
-      transition: { duration: 0.3 }
-    });
-
-    await pokemonAction(action);
-
-    await animationCard.controls.set({ y: -300, opacity: 0, x: 0, rotate: 0 });
-    await animationCard.controls.start({
-      y: 0,
-      opacity: 1
-    });
-  };
-
-  const onActionClick = async (action: 'pass' | 'smash') => {
+  const onAction = async (action: 'pass' | 'smash') => {
     await animationCard.controls.start({
       x: action === 'pass' ? -500 : 500,
       rotate: 45,
@@ -60,11 +53,6 @@ export const useMainPage = () => {
       transition: { duration: 0 }
     });
     await pokemonAction(action);
-
-    await animationCard.controls.start({
-      y: 0,
-      opacity: 1
-    });
   };
 
   return {
@@ -79,8 +67,8 @@ export const useMainPage = () => {
       }
     },
     functions: {
-      onActionClick,
-      onCardDragEnd
+      onActionClick: onAction,
+      onCardDragEnd: onAction
     }
   };
 };

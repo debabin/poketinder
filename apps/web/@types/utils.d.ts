@@ -32,6 +32,6 @@ interface InfinityQuerySettings<Func = unknown> {
       import('@tanstack/react-query').InfiniteData<Awaited<ReturnType<Func>>>,
       any
     >,
-    'queryKey'
+    'getNextPageParam' | 'initialPageParam' | 'queryKey'
   >;
 }

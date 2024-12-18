@@ -6,7 +6,7 @@
  */
 import type { PokemonStatistic } from './pokemonStatistic';
 
-export interface PaginationPokemonsResponse {
+export interface PaginationStatisticPokemonsResponse {
   /** The total number of items available */
   itemCount: number;
   /** Indicates if there is a next page available */
