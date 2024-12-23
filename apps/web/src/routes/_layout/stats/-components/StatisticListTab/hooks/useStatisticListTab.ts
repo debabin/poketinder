@@ -1,18 +1,29 @@
-import { useDebounceValue, useField, useIntersectionObserver } from '@siberiacancode/reactuse';
-import { getRouteApi } from '@tanstack/react-router';
+import {
+  useDebounceValue,
+  useDidUpdate,
+  useField,
+  useIntersectionObserver
+} from '@siberiacancode/reactuse';
+// import { getRouteApi } from '@tanstack/react-router';
 
 import { useGetStatisticPokemonsInfiniteQuery } from '@/utils/api/hooks';
 
-const routeApi = getRouteApi('/stats/');
+import { POKEMONS_REQUESTS_PAGINATION } from '../../../-constants';
+
+// const routeApi = getRouteApi('/_layout/stats/');
 
 export const useStatisticTab = () => {
-  const { offset } = routeApi.useSearch();
+  // const { offset, limit } = routeApi.useSearch();
   const nameField = useField();
   const name = nameField.watch();
   const debouncedValue = useDebounceValue(name, 500);
 
   const getPokemonsInfinityQuery = useGetStatisticPokemonsInfiniteQuery(
-    { offset, limit: 10, name: debouncedValue },
+    {
+      offset: POKEMONS_REQUESTS_PAGINATION.OFFSET,
+      limit: POKEMONS_REQUESTS_PAGINATION.LIMIT,
+      ...(debouncedValue && { name: debouncedValue })
+    },
     {
       options: {
         gcTime: 10_000
@@ -21,13 +32,14 @@ export const useStatisticTab = () => {
   );
 
   const intersectionObserver = useIntersectionObserver<HTMLDivElement>({
-    onChange: () => {
-      if (getPokemonsInfinityQuery.isFetchingNextPage) return;
-      getPokemonsInfinityQuery.fetchNextPage();
-    },
-    enabled: getPokemonsInfinityQuery.hasNextPage,
+    threshold: 0.5,
     rootMargin: '300px'
   });
+
+  useDidUpdate(() => {
+    if (getPokemonsInfinityQuery.isFetchingNextPage) return;
+    getPokemonsInfinityQuery.fetchNextPage();
+  }, [intersectionObserver.inView]);
 
   const onRefreshClick = () => {
     getPokemonsInfinityQuery.refetch();

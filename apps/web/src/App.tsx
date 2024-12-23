@@ -3,8 +3,6 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 
 import { routeTree } from '../generated/router';
 
-import './App.css';
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

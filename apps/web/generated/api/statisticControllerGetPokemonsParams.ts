@@ -7,24 +7,24 @@
 import type { StatisticControllerGetPokemonsRaiting } from './statisticControllerGetPokemonsRaiting';
 
 export type StatisticControllerGetPokemonsParams = {
-/**
- * Number of pokemons to return per page
- */
-limit?: number;
-/**
- * Number of pokemons to skip
- */
-offset: number;
-/**
- * Filter pokemons by name
- */
-name?: string;
-/**
- * Filter pokemons by type
- */
-types?: string[];
-/**
- * Filter pokemons by raiting type (smash or pass)
- */
-raiting?: StatisticControllerGetPokemonsRaiting;
+  /**
+   * Number of pokemons to return per page
+   */
+  limit?: number;
+  /**
+   * Number of pokemons to skip
+   */
+  offset: number;
+  /**
+   * Filter pokemons by name
+   */
+  name?: string;
+  /**
+   * Filter pokemons by type
+   */
+  types?: string[];
+  /**
+   * Filter pokemons by raiting type (smash or pass)
+   */
+  raiting?: StatisticControllerGetPokemonsRaiting;
 };

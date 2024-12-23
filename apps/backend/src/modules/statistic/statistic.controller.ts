@@ -3,16 +3,15 @@ import type { SelectQueryBuilder } from 'typeorm';
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import type { PokemonService } from '@/modules/pokemon';
-import type { GetPokemonDto } from '@/modules/pokemon/dto';
+import { PokemonService } from '@/modules/pokemon';
 
 import { BaseResolver, BaseResponse } from '@/shared';
 
 import type { PokemonStatistic } from './entities';
-import type {  PaginationStatisticPokemonsResponse} from './statistic.model';
-import type { StatisticService } from './statistic.service';
+import type { PaginationStatisticPokemonsResponse } from './statistic.model';
+import { StatisticService } from './statistic.service';
 
-import { ActionPokemonDto } from './dto';
+import { ActionPokemonDto, GetPokemonDto } from './dto';
 import { PokemonStatisticResponse, StatisticPokemonsResponse } from './statistic.model';
 
 @ApiTags('statistic')
@@ -73,7 +72,7 @@ export class StatisticController extends BaseResolver {
     `, 'raiting');
 
     pokemonQuery.orderBy('raiting', raiting.toUpperCase() as 'ASC' | 'DESC');
-    
+
     if (getPokemonDto.name) {
       pokemonQuery.where('pokemon.name ILIKE :name', { name: `%${getPokemonDto.name}%` });
     }

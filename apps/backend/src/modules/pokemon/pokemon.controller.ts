@@ -3,7 +3,7 @@ import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { BaseResolver } from '@/shared';
 
-import type { PokemonService } from './pokemon.service';
+import { PokemonService } from './pokemon.service';
 
 import { PokemonResponse } from './pokemon.model';
 

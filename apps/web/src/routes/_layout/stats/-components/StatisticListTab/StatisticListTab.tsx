@@ -30,7 +30,12 @@ export const StatisticListTab = () => {
     <>
       <div className='flex gap-2 mb-4'>
         <div>
-          <Input {...state.nameField.register()} className='w-full' id='searchName' placeholder='Search by name' />
+          <Input
+            {...state.nameField.register()}
+            className='w-full'
+            id='searchName'
+            placeholder='Search by name'
+          />
         </div>
         <div>
           <Select>
@@ -61,7 +66,7 @@ export const StatisticListTab = () => {
             visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.05 } }
           }}
           animate='visible'
-          className='flex flex-col gap-3 mb-3'
+          className='flex flex-col gap-3 mb-24'
           initial='hidden'
         >
           {state.pokemons.map((pokemon) => (
@@ -103,7 +108,9 @@ export const StatisticListTab = () => {
                       )}
                     >
                       {Math.round(
-                        (pokemon.statistic.smash / (pokemon.statistic.pass + pokemon.statistic.smash)) * 100
+                        (pokemon.statistic.smash /
+                          (pokemon.statistic.pass + pokemon.statistic.smash)) *
+                          100
                       )}
                       %
                     </div>
@@ -141,7 +148,9 @@ export const StatisticListTab = () => {
                       )}
                     >
                       {Math.round(
-                        (pokemon.statistic.pass / (pokemon.statistic.pass + pokemon.statistic.smash)) * 100
+                        (pokemon.statistic.pass /
+                          (pokemon.statistic.pass + pokemon.statistic.smash)) *
+                          100
                       )}
                       %
                     </div>
@@ -153,12 +162,14 @@ export const StatisticListTab = () => {
         </motion.ul>
       )}
 
-      <div className='flex flex-col gap-3'>
-        {(state.isPending || state.isLoadMore) &&
-          Array.from({ length: 10 }).map((_, index) => (
+      {(state.isPending || state.isLoadMore) && (
+        <div className='flex flex-col gap-3'>
+          {Array.from({ length: 20 }).map((_, index) => (
             <Skeleton key={index} className='h-16 w-full bg-gray-100' />
           ))}
-      </div>
+        </div>
+      )}
+
       <div ref={refs.container} />
     </>
   );

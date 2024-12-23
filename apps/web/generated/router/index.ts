@@ -13,82 +13,107 @@ import { createFileRoute } from '@tanstack/react-router';
 // Import Routes
 
 import { Route as rootRoute } from './../../src/routes/__root';
-import { Route as StatsIndexImport } from './../../src/routes/stats/index';
+import { Route as LayoutImport } from './../../src/routes/_layout';
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')();
+const LayoutIndexLazyImport = createFileRoute('/_layout/')();
+const LayoutStatsIndexLazyImport = createFileRoute('/_layout/stats/')();
 
 // Create/Update Routes
 
-const IndexLazyRoute = IndexLazyImport.update({
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => rootRoute
+} as any);
+
+const LayoutIndexLazyRoute = LayoutIndexLazyImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute
-} as any).lazy(() => import('./../../src/routes/index.lazy').then((d) => d.Route));
+  getParentRoute: () => LayoutRoute
+} as any).lazy(() => import('./../../src/routes/_layout/index.lazy').then((d) => d.Route));
 
-const StatsIndexRoute = StatsIndexImport.update({
+const LayoutStatsIndexLazyRoute = LayoutStatsIndexLazyImport.update({
   id: '/stats/',
   path: '/stats/',
-  getParentRoute: () => rootRoute
-} as any).lazy(() => import('./../../src/routes/stats/index.lazy').then((d) => d.Route));
+  getParentRoute: () => LayoutRoute
+} as any).lazy(() => import('./../../src/routes/_layout/stats/index.lazy').then((d) => d.Route));
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexLazyImport;
+    '/_layout': {
+      id: '/_layout';
+      path: '';
+      fullPath: '';
+      preLoaderRoute: typeof LayoutImport;
       parentRoute: typeof rootRoute;
     };
-    '/stats/': {
-      id: '/stats/';
+    '/_layout/': {
+      id: '/_layout/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof LayoutIndexLazyImport;
+      parentRoute: typeof LayoutImport;
+    };
+    '/_layout/stats/': {
+      id: '/_layout/stats/';
       path: '/stats';
       fullPath: '/stats';
-      preLoaderRoute: typeof StatsIndexImport;
-      parentRoute: typeof rootRoute;
+      preLoaderRoute: typeof LayoutStatsIndexLazyImport;
+      parentRoute: typeof LayoutImport;
     };
   }
 }
 
 // Create and export the route tree
 
+interface LayoutRouteChildren {
+  LayoutIndexLazyRoute: typeof LayoutIndexLazyRoute;
+  LayoutStatsIndexLazyRoute: typeof LayoutStatsIndexLazyRoute;
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutIndexLazyRoute: LayoutIndexLazyRoute,
+  LayoutStatsIndexLazyRoute: LayoutStatsIndexLazyRoute
+};
+
+const LayoutRouteWithChildren = LayoutRoute._addFileChildren(LayoutRouteChildren);
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute;
-  '/stats': typeof StatsIndexRoute;
+  '': typeof LayoutRouteWithChildren;
+  '/': typeof LayoutIndexLazyRoute;
+  '/stats': typeof LayoutStatsIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute;
-  '/stats': typeof StatsIndexRoute;
+  '/': typeof LayoutIndexLazyRoute;
+  '/stats': typeof LayoutStatsIndexLazyRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
-  '/': typeof IndexLazyRoute;
-  '/stats/': typeof StatsIndexRoute;
+  '/_layout': typeof LayoutRouteWithChildren;
+  '/_layout/': typeof LayoutIndexLazyRoute;
+  '/_layout/stats/': typeof LayoutStatsIndexLazyRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/stats';
+  fullPaths: '' | '/' | '/stats';
   fileRoutesByTo: FileRoutesByTo;
   to: '/' | '/stats';
-  id: '__root__' | '/' | '/stats/';
+  id: '__root__' | '/_layout' | '/_layout/' | '/_layout/stats/';
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute;
-  StatsIndexRoute: typeof StatsIndexRoute;
+  LayoutRoute: typeof LayoutRouteWithChildren;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
-  StatsIndexRoute: StatsIndexRoute
+  LayoutRoute: LayoutRouteWithChildren
 };
 
 export const routeTree = rootRoute
@@ -101,15 +126,23 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/stats/"
+        "/_layout"
       ]
     },
-    "/": {
-      "filePath": "index.lazy.tsx"
+    "/_layout": {
+      "filePath": "_layout.tsx",
+      "children": [
+        "/_layout/",
+        "/_layout/stats/"
+      ]
     },
-    "/stats/": {
-      "filePath": "stats/index.tsx"
+    "/_layout/": {
+      "filePath": "_layout/index.lazy.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/stats/": {
+      "filePath": "_layout/stats/index.lazy.tsx",
+      "parent": "/_layout"
     }
   }
 }

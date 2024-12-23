@@ -5,11 +5,11 @@
  * OpenAPI spec version: 1.0
  */
 
-export type StatisticControllerGetPokemonsRaiting = typeof StatisticControllerGetPokemonsRaiting[keyof typeof StatisticControllerGetPokemonsRaiting];
-
+export type StatisticControllerGetPokemonsRaiting =
+  (typeof StatisticControllerGetPokemonsRaiting)[keyof typeof StatisticControllerGetPokemonsRaiting];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const StatisticControllerGetPokemonsRaiting = {
   asc: 'asc',
-  desc: 'desc',
+  desc: 'desc'
 } as const;

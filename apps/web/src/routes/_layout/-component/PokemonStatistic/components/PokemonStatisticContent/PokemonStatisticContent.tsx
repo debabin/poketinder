@@ -22,7 +22,7 @@ export const PokemonStatisticContent = ({ statistic, pokemon }: PokemonStatistic
   const pokemonBackground = useMemo(() => getPokemonBackground(pokemon.types[0]), [pokemon.id]);
 
   return (
-    <div className='flex flex-col gap-2 justify-center'>
+    <div className='flex flex-col gap-2 justify-center w-full'>
       <div className='flex gap-2 items-center justify-center'>
         What Others Chose for{' '}
         <span className={cn(pokemonTypesVariants({ type: pokemon.types[0] }))}>{pokemon.name}</span>

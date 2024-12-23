@@ -1,6 +1,9 @@
 import type { FetchesRequestConfig } from '@siberiacancode/fetches';
 
-import type { StatisticControllerGetPokemonsParams, StatisticPokemonsResponse } from '@/generated/api';
+import type {
+  StatisticControllerGetPokemonsParams,
+  StatisticPokemonsResponse
+} from '@/generated/api';
 
 import { api } from '@/utils/api/instance';
 
