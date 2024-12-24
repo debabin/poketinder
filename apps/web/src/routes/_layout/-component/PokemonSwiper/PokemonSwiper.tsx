@@ -21,7 +21,7 @@ export const PokemonSwiper = () => {
   const { state, functions } = usePokemonSwiper();
 
   return (
-    <div className='flex gap-4 flex-col'>
+    <div className='flex gap-4 flex-col relative'>
       <motion.div
         drag
         dragElastic={{
@@ -78,7 +78,7 @@ export const PokemonSwiper = () => {
               <PokemonCardBackground
                 src={`backgrounds/bg-${getPokemonBackground(state.pokemon.types[0])}.png`}
               />
-              <div className='absolute bottom-0 top-0 right-0 left-0 z-50' />
+              <div className='absolute bottom-0 top-0 right-0 left-0 z-[1]' />
               <PokemonCardImage loading='lazy' />
               <PokemonCardContent className='text-left'>
                 <PokemonCardTitle className='text-5xl' />

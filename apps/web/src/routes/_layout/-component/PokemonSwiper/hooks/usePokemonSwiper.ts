@@ -1,4 +1,4 @@
-import { useDidUpdate, useLocalStorage } from '@siberiacancode/reactuse';
+import { useDidUpdate, useKeyPressEvent, useLocalStorage } from '@siberiacancode/reactuse';
 import { keepPreviousData } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -54,6 +54,9 @@ export const usePokemonSwiper = () => {
     });
     await pokemonAction(action);
   };
+
+  useKeyPressEvent('ArrowLeft', () => onAction('pass'));
+  useKeyPressEvent('ArrowRight', () => onAction('smash'));
 
   return {
     state: {

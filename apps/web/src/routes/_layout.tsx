@@ -1,23 +1,22 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
-import { BottomMenu } from './-component';
-import { Header } from './-component/Header/Header';
+import { BottomMenu, Header, Socials } from './-component';
 
-const RootLayout = () => {
-  return (
+const RootLayout = () => (
+  <div className='container max-w-[1000px] m-auto'>
     <div className='flex flex-col h-full overflow-hidden'>
-      <div>
+      <div className='container hidden lg:block'>
         <Header />
       </div>
-      <div className='flex-1'>
+      <main className='flex-1 px-4'>
         <Outlet />
-      </div>
-      <div>
+      </main>
+      <div className='lg:hidden'>
         <BottomMenu />
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export const Route = createFileRoute('/_layout')({
   component: RootLayout

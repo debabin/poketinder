@@ -1,14 +1,15 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 
-import { PokemonStatistic, PokemonSwiper } from './-component';
+import { PokemonStatistic, PokemonSwiper, Socials } from './-component';
 
 const MainPage = () => (
-  <main className='flex justify-center items-center h-full overflow-hidden'>
+  <div className='flex justify-center items-center'>
     <div className='flex gap-4 flex-col px-2 pt-10'>
       <PokemonSwiper />
       <PokemonStatistic />
+      <Socials />
     </div>
-  </main>
+  </div>
 );
 
 export const Route = createLazyFileRoute('/_layout/')({

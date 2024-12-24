@@ -5,6 +5,7 @@ import {
   useIntersectionObserver
 } from '@siberiacancode/reactuse';
 // import { getRouteApi } from '@tanstack/react-router';
+import { keepPreviousData } from '@tanstack/react-query';
 
 import { useGetStatisticPokemonsInfiniteQuery } from '@/utils/api/hooks';
 
@@ -26,7 +27,8 @@ export const useStatisticTab = () => {
     },
     {
       options: {
-        gcTime: 10_000
+        gcTime: 10_000,
+        placeholderData: keepPreviousData
       }
     }
   );
@@ -53,7 +55,8 @@ export const useStatisticTab = () => {
       container: intersectionObserver.ref
     },
     state: {
-      isPending: getPokemonsInfinityQuery.isPending,
+      isFetching: getPokemonsInfinityQuery.isFetching,
+      isLoading: getPokemonsInfinityQuery.isLoading,
       isLoadMore: getPokemonsInfinityQuery.isFetchingNextPage,
       isRefreshing: getPokemonsInfinityQuery.isRefetching,
       pokemons,

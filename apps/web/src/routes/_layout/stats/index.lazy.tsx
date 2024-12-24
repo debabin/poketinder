@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui';
 import { StatisticListTab } from './-components';
 
 const StatsPage = () => (
-  <main className='container max-w-[1000px] m-auto pt-10 px-4'>
+  <>
     <h1 className='text-5xl font-light text-left mb-8'>Statistic page</h1>
     <Tabs defaultValue='stats'>
       <div className='flex justify-start'>
@@ -19,7 +19,7 @@ const StatsPage = () => (
         <StatisticListTab />
       </TabsContent>
     </Tabs>
-  </main>
+  </>
 );
 
 export const Route = createLazyFileRoute('/_layout/stats/')({

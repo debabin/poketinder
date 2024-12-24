@@ -1,20 +1,25 @@
 import { Link } from '@tanstack/react-router';
-import { GithubIcon, HeartIcon } from 'lucide-react';
+import { Coffee, Github, HeartIcon, Twitch } from 'lucide-react';
 
 import { PokeballIcon } from '@/components/icons';
 import {
+  Button,
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger
+  NavigationMenuTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
 } from '@/components/ui';
 
 export const Header = () => (
-  <header className='flex items-center justify-between h-15'>
+  <header className='flex items-center justify-between h-15 py-4'>
     <div className='flex items-center justify-between gap-4'>
-      <Link href='/'>
+      <Link to='/'>
         <PokeballIcon className='size-6' />
         <span className='sr-only'>Acme Inc</span>
       </Link>
@@ -39,8 +44,8 @@ export const Header = () => (
                 <li>
                   <NavigationMenuLink asChild>
                     <Link
-                      href='/'
                       className='block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+                      to='/'
                     >
                       <div className='text-sm font-medium leading-none'>Choose your poke</div>
                       <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>
@@ -52,8 +57,8 @@ export const Header = () => (
                 <li>
                   <NavigationMenuLink asChild>
                     <Link
-                      href='#'
                       className='block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+                      to='/stats'
                     >
                       <div className='text-sm font-medium leading-none'>Statistic</div>
                       <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>
@@ -103,13 +108,10 @@ export const Header = () => (
     </div>
 
     <div className='flex items-center gap-4'>
-      <Link href='/' className='text-muted-foreground hover:text-primary'>
-        <GithubIcon className='h-6 w-6' />
-        <span className='sr-only'>GitHub</span>
-      </Link>
-      <Link href='/' className='text-muted-foreground hover:text-primary'>
-        <span className='sr-only'>Telegram</span>
-      </Link>
+      <Button className='flex items-center space-x-2 bg-violet-600 hover:bg-violet-700'>
+        <Twitch className='w-5 h-5' />
+        <span>Sign in with Twitch</span>
+      </Button>
     </div>
   </header>
 );

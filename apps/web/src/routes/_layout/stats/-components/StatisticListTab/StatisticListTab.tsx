@@ -33,12 +33,13 @@ export const StatisticListTab = () => {
           <Input
             {...state.nameField.register()}
             className='w-full'
+            disabled={state.isFetching}
             id='searchName'
             placeholder='Search by name'
           />
         </div>
         <div>
-          <Select>
+          <Select disabled={state.isFetching}>
             <SelectTrigger className='w-[180px]'>
               <SelectValue placeholder='Select a type' />
             </SelectTrigger>
@@ -54,19 +55,19 @@ export const StatisticListTab = () => {
           </Select>
         </div>
         <div>
-          <Button variant='outline' onClick={functions.onRefreshClick}>
+          <Button disabled={state.isFetching} variant='outline' onClick={functions.onRefreshClick}>
             <RefreshCwIcon className='size-5' />
           </Button>
         </div>
       </div>
-      {!state.isPending && (
+      {!state.isLoading && (
         <motion.ul
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.05 } }
           }}
           animate='visible'
-          className='flex flex-col gap-3 mb-24'
+          className={cn('flex flex-col gap-3 mb-24', { 'animate-pulse': state.isFetching })}
           initial='hidden'
         >
           {state.pokemons.map((pokemon) => (
@@ -162,7 +163,7 @@ export const StatisticListTab = () => {
         </motion.ul>
       )}
 
-      {(state.isPending || state.isLoadMore) && (
+      {(state.isLoading || state.isLoadMore) && (
         <div className='flex flex-col gap-3'>
           {Array.from({ length: 20 }).map((_, index) => (
             <Skeleton key={index} className='h-16 w-full bg-gray-100' />
