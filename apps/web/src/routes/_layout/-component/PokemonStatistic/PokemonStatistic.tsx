@@ -6,7 +6,7 @@ export const PokemonStatistic = () => {
 
   return (
     <>
-      {state.loading && <PokemonStatisticSkeleton />}
+      {(state.loading || !state.pokemon) && <PokemonStatisticSkeleton />}
       {!state.loading && state.statistic && state.pokemon && (
         <PokemonStatisticContent statistic={state.statistic} pokemon={state.pokemon} />
       )}

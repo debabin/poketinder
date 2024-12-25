@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 import React from 'react';
 
-import { Card, CardDescription, CardTitle } from '@/components/ui';
+import { Card, CardDescription, CardTitle, Skeleton, Spinner } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
 interface Pokemon {
@@ -79,6 +79,15 @@ const PokemonCardImage = React.forwardRef<HTMLImageElement, React.ComponentProps
 );
 PokemonCardImage.displayName = 'PokemonCardImage';
 
+const PokemonCardImageSkeleton = React.forwardRef<HTMLDivElement, PokemonCardProps>(
+  ({ children, className, pokemon, ...props }, ref) => (
+    <div ref={ref} className={cn('absolute h-full w-full left-0 top-0 flex justify-center items-center', className)} {...props}>
+      <Spinner className='stroke-gray-300 size-12' />
+    </div>
+  )
+);
+PokemonCardImageSkeleton.displayName = 'PokemonCardImageSkeleton';
+
 const PokemonCardContent = React.forwardRef<HTMLDivElement, React.ComponentProps<'div'>>(
   ({ className, ...props }, ref) => (
     <div
@@ -112,6 +121,16 @@ const PokemonCardTitle = React.forwardRef<
 });
 PokemonCardTitle.displayName = 'PokemonCardTitle';
 
+const PokemonCardTitleSkeleton = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn('mb-1', className)} {...props}>
+    <Skeleton className='h-10 w-1/2' {...props} />
+  </div>
+));
+PokemonCardTitleSkeleton.displayName = 'PokemonCardTitleSkeleton';
+
 const PokemonCardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
@@ -123,6 +142,16 @@ const PokemonCardDescription = React.forwardRef<
   />
 ));
 PokemonCardDescription.displayName = 'PokemonCardDescription';
+
+const PokemonCardDescriptionSkeleton = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn('w-full', className)} {...props}>
+    <Skeleton className='h-10' {...props} />
+  </div>
+));
+PokemonCardDescriptionSkeleton.displayName = 'PokemonCardDescriptionSkeleton';
 
 export const pokemonTypesVariants = cva<{ type: Record<string, string> }>(
   'rounded-lg text-[10px] py-0.5 px-2 text-white capitalize font-bold',
@@ -184,13 +213,27 @@ const PokemonCardTypes = React.forwardRef<HTMLDivElement, React.ComponentProps<'
 );
 PokemonCardTypes.displayName = 'PokemonCardTypes';
 
+const PokemonCardTypesSkeleton = React.forwardRef<HTMLDivElement, React.ComponentProps<'div'>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn('flex gap-1', className)} {...props}>
+      <Skeleton className='h-4 w-12' />
+      <Skeleton className='h-4 w-12' />
+    </div>
+  )
+);
+PokemonCardTypesSkeleton.displayName = 'PokemonCardTypesSkeleton';
+
 export {
   PokemonCard,
   PokemonCardBackground,
   PokemonCardContent,
   PokemonCardDescription,
+  PokemonCardDescriptionSkeleton,
   PokemonCardImage,
+  PokemonCardImageSkeleton,
   PokemonCardTitle,
+  PokemonCardTitleSkeleton,
   PokemonCardTypes,
+  PokemonCardTypesSkeleton,
   PokemonType
 };
