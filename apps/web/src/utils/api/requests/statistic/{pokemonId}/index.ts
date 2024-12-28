@@ -5,7 +5,7 @@ import type { StatisticPokemonResponse } from '@/generated/api';
 import { api } from '@/utils/api/instance';
 
 export interface GetStatisticParams {
-  pokemonId: number | string;
+  pokemonId: number;
 }
 
 export type GetStatisticRequestConfig = FetchesRequestConfig<GetStatisticParams>;

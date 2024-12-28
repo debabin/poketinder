@@ -3,8 +3,8 @@ import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { BottomMenu, Header } from './-component';
 
 const RootLayout = () => (
-  <div className='container max-w-[1000px] m-auto  px-4'>
-    <div className='flex flex-col h-full overflow-hidden'>
+  <div className='container max-w-[1000px] m-auto px-4 overflow-hidden'>
+    <div className='flex flex-col h-full'>
       <div className='container hidden lg:block'>
         <Header />
       </div>

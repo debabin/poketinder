@@ -6,15 +6,15 @@ export class ActionPokemonDto {
     description: 'Pokemon ID (must be a positive integer)',
     example: 1
   })
-  @IsInt({ message: 'Pokemon ID must be an integer' })
-  @Min(1, { message: 'Pokemon ID must be a positive integer' })
+  @IsInt()
+  @Min(1)
   pokemonId: number;
 
   @ApiProperty({
     description: 'User action (either "pass" or "smash")',
     example: 'pass'
   })
-  @IsString({ message: 'Action must be a string' })
+  @IsString()
   @IsIn(['pass', 'smash'], { message: 'Action must be either "pass" or "smash"' })
   action: 'pass' | 'smash';
 }

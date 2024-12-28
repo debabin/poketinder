@@ -13,7 +13,7 @@ import { POKEMONS_REQUESTS_PAGINATION } from '../../../-constants';
 
 // const routeApi = getRouteApi('/_layout/stats/');
 
-export const useStatisticTab = () => {
+export const useStatisticListTab = () => {
   // const { offset, limit } = routeApi.useSearch();
   const nameField = useField();
   const name = nameField.watch();

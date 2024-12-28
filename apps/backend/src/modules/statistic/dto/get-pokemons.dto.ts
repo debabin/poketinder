@@ -4,14 +4,14 @@ import { IsArray, IsIn, IsOptional, IsString } from 'class-validator';
 
 import { PaginationDto } from '@/shared';
 
-export class GetPokemonDto extends PaginationDto {
+export class GetPokemonsDto extends PaginationDto {
   @ApiProperty({
     description: 'Filter pokemons by name (case-insensitive)',
     example: 'pikachu',
     required: false
   })
   @IsOptional()
-  @IsString({ message: 'Name must be a string' })
+  @IsString()
   name?: string;
 
   @ApiProperty({
@@ -37,6 +37,6 @@ export class GetPokemonDto extends PaginationDto {
   })
   @IsOptional()
   @IsString()
-  @IsIn(['smash', 'pass'], { message: 'Raiting must be either "desc" or "acs"' })
-  raiting?: 'asc' | 'desc';
+  @IsIn(['asc', 'desc'], { message: 'Raiting must be either "desc" or "acs"' })
+  rating?: 'asc' | 'desc';
 }

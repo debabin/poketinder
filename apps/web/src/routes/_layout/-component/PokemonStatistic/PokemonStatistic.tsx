@@ -4,6 +4,8 @@ import { usePokemonStatistic } from './hooks/usePokemonStatistic';
 export const PokemonStatistic = () => {
   const { state } = usePokemonStatistic();
 
+  if (!state.prevPokemonId) return <div>placeholder</div>;
+
   return (
     <>
       {(state.loading || !state.pokemon) && <PokemonStatisticSkeleton />}

@@ -81,7 +81,14 @@ PokemonCardImage.displayName = 'PokemonCardImage';
 
 const PokemonCardImageSkeleton = React.forwardRef<HTMLDivElement, PokemonCardProps>(
   ({ children, className, pokemon, ...props }, ref) => (
-    <div ref={ref} className={cn('absolute h-full w-full left-0 top-0 flex justify-center items-center', className)} {...props}>
+    <div
+      ref={ref}
+      className={cn(
+        'absolute h-full w-full left-0 top-0 flex justify-center items-center',
+        className
+      )}
+      {...props}
+    >
       <Spinner className='stroke-gray-300 size-12' />
     </div>
   )

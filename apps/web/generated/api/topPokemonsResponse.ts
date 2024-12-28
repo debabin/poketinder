@@ -4,11 +4,11 @@
  * Poketinder
  * OpenAPI spec version: 1.0
  */
-import type { Pokemon } from './pokemon';
+import type { PokemonStatistic } from './pokemonStatistic';
 
-export interface PokemonsResponse {
+export interface TopPokemonsResponse {
   /** Pokemon */
-  pokemons: Pokemon[];
+  pokemons: PokemonStatistic[];
   /**
    * Error reason
    * @nullable

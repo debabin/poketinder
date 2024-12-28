@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { Coffee, Github, HeartIcon, Twitch } from 'lucide-react';
+import { HeartIcon, Twitch } from 'lucide-react';
 
 import { PokeballIcon } from '@/components/icons';
 import {
@@ -9,11 +9,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
+  NavigationMenuTrigger
 } from '@/components/ui';
 
 export const Header = () => (

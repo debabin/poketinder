@@ -12,4 +12,7 @@ export type GetStatisticPokemonsParams = StatisticControllerGetPokemonsParams;
 export type GetPokemonsRequestConfig = FetchesRequestConfig<GetStatisticPokemonsParams>;
 
 export const getPokemons = ({ config, params }: GetPokemonsRequestConfig) =>
-  api.get<StatisticPokemonsResponse>('statistic/pokemons', { params, ...config });
+  api.get<StatisticPokemonsResponse>('statistic/pokemons', {
+    ...config,
+    params: { ...params, ...config?.params }
+  });

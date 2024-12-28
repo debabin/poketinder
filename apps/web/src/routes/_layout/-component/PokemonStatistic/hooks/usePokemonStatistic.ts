@@ -9,9 +9,10 @@ const REFETCH_STATS_TIME = 5_000;
 export const usePokemonStatistic = () => {
   const prevPokemonIdStorage = useLocalStorage<number>(LOCAL_STORAGE_KEYS.PREV_POKEMON_ID);
 
+  const prevPokemonId = !!prevPokemonIdStorage.value;
   const getPokemonQuery = useGetPokemonQuery(
     { pokemonId: prevPokemonIdStorage.value! },
-    { options: { enabled: !!prevPokemonIdStorage.value } }
+    { options: { enabled: !!prevPokemonId } }
   );
 
   const getStatisticPokemonQuery = useGetStatisticQuery(
@@ -22,13 +23,14 @@ export const usePokemonStatistic = () => {
       options: {
         placeholderData: keepPreviousData,
         refetchInterval: REFETCH_STATS_TIME,
-        enabled: !!prevPokemonIdStorage.value
+        enabled: !!prevPokemonId
       }
     }
   );
 
   return {
     state: {
+      prevPokemonId,
       statistic: getStatisticPokemonQuery.data?.data.statistic,
       pokemon: getPokemonQuery.data?.data.pokemon,
       loading: getPokemonQuery.isLoading || getStatisticPokemonQuery.isLoading

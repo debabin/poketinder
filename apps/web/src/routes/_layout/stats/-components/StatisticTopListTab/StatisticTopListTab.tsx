@@ -1,19 +1,9 @@
-import { RefreshCwIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 
 import {
-  Button,
   Card,
-  Input,
   PokemonStatisticLine,
   PokemonType,
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Skeleton,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -21,45 +11,20 @@ import {
 } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
-import { useStatisticListTab } from './hooks/useStatisticListTab';
+import { useStatisticTopListTab } from './hooks/useStatisticTopListTab';
 
-export const StatisticListTab = () => {
-  const { refs, state, functions } = useStatisticListTab();
+export const StatisticTopListTab = () => {
+  const { state } = useStatisticTopListTab();
 
   return (
     <>
-      <div className='flex gap-2 mb-4'>
-        <div>
-          <Input
-            {...state.nameField.register()}
-            className='w-full'
-            disabled={state.isFetching}
-            id='searchName'
-            placeholder='Search by name'
-          />
-        </div>
-        <div>
-          <Select disabled={state.isFetching}>
-            <SelectTrigger className='w-[180px]'>
-              <SelectValue placeholder='Select a type' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value='apple'>Apple</SelectItem>
-                <SelectItem value='banana'>Banana</SelectItem>
-                <SelectItem value='blueberry'>Blueberry</SelectItem>
-                <SelectItem value='grapes'>Grapes</SelectItem>
-                <SelectItem value='pineapple'>Pineapple</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Button disabled={state.isFetching} variant='outline' onClick={functions.onRefreshClick}>
-            <RefreshCwIcon className='size-5' />
-          </Button>
-        </div>
-      </div>
+      {!!state.winnerPokemons.length && (
+        <>
+          {state.winnerPokemons.map((pokemon) => (
+            <div key={pokemon.id}>{pokemon.name}</div>
+          ))}
+        </>
+      )}
       {!state.isLoading && (
         <motion.ul
           variants={{
@@ -70,7 +35,7 @@ export const StatisticListTab = () => {
           className={cn('flex flex-col gap-3 mb-24', { 'animate-pulse': state.isFetching })}
           initial='hidden'
         >
-          {state.pokemons.map((pokemon) => (
+          {state.otherPokemons.map((pokemon) => (
             <motion.li
               key={pokemon.id}
               variants={{
@@ -162,16 +127,6 @@ export const StatisticListTab = () => {
           ))}
         </motion.ul>
       )}
-
-      {(state.isLoading || state.isLoadMore) && (
-        <div className='flex flex-col gap-3'>
-          {Array.from({ length: 20 }).map((_, index) => (
-            <Skeleton key={index} className='h-16 w-full bg-gray-100' />
-          ))}
-        </div>
-      )}
-
-      <div ref={refs.container} />
     </>
   );
 };

@@ -7,6 +7,7 @@
 
 export * from './actionPokemonDto';
 export * from './baseResponse';
+export * from './function';
 export * from './paginationPokemonsResponse';
 export * from './paginationStatisticPokemonsResponse';
 export * from './pokemon';
@@ -17,5 +18,10 @@ export * from './pokemonsResponse';
 export * from './statistic';
 export * from './statisticControllerGetPokemonsParams';
 export * from './statisticControllerGetPokemonsRaiting';
+export * from './statisticControllerGetPokemonsRating';
+export * from './statisticControllerGetStatisticPokemonsParams';
+export * from './statisticControllerGetStatisticPokemonsRating';
+export * from './statisticControllerGetTopPokemonsParams';
 export * from './statisticPokemonResponse';
 export * from './statisticPokemonsResponse';
+export * from './topPokemonsResponse';

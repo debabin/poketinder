@@ -2,20 +2,22 @@ import { createLazyFileRoute } from '@tanstack/react-router';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui';
 
-import { StatisticListTab } from './-components';
+import { StatisticListTab, StatisticTopListTab } from './-components';
 
 const StatsPage = () => (
   <>
     <h1 className='text-5xl font-light text-left mb-8'>Statistic page</h1>
-    <Tabs defaultValue='stats'>
+    <Tabs defaultValue='top-20'>
       <div className='flex justify-start'>
         <TabsList className='mb-2'>
-          <TabsTrigger value='top-10'>🏆 Top 10 pokemons</TabsTrigger>
-          <TabsTrigger value='stats'>📊 Statistic list</TabsTrigger>
+          <TabsTrigger value='top-20'>🏆 Top 20 pokemons</TabsTrigger>
+          <TabsTrigger value='list'>📊 Statistic list</TabsTrigger>
         </TabsList>
       </div>
-      <TabsContent value='top-10'>top 10 here</TabsContent>
-      <TabsContent value='stats'>
+      <TabsContent value='top-20'>
+        <StatisticTopListTab />
+      </TabsContent>
+      <TabsContent value='list'>
         <StatisticListTab />
       </TabsContent>
     </Tabs>

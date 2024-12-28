@@ -4,7 +4,7 @@ export const useAnimationCard = () => {
   const controls = useAnimation();
   const x = useMotionValue(0);
   const rotateRaw = useTransform(x, [-200, 200], [-10, 10]);
-  const opacity = useTransform(x, [-400, 0, 400], [0.3, 1, 0.3]);
+  const opacity = useTransform(x, [-400, 0, 400], [0.9, 1, 0.3]);
   const rotate = useTransform(() => `${rotateRaw.get()}deg`);
   const color = useTransform(
     x,

@@ -3,7 +3,7 @@ import { Entity } from 'typeorm';
 
 import { Pokemon } from '@/modules/pokemon/entities';
 
-import type { Statistic } from './statistic.entity';
+import { Statistic } from './statistic.entity';
 
 @Entity('pokemon_statistic')
 export class PokemonStatistic extends Pokemon {

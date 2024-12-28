@@ -13,9 +13,7 @@ import {
   PokemonCardTitle,
   PokemonCardTitleSkeleton,
   PokemonCardTypes,
-  PokemonCardTypesSkeleton,
-  Skeleton,
-  Spinner
+  PokemonCardTypesSkeleton
 } from '@/components/ui';
 import { getPokemonBackground } from '@/utils/helpers/pokemon';
 
