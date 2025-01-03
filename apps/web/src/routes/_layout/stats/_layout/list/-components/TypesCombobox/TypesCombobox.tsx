@@ -1,4 +1,4 @@
-import { CheckIcon, LucideCircleFadingPlus } from 'lucide-react';
+import { LucideCircleFadingPlus } from 'lucide-react';
 import { useState } from 'react';
 
 import {
