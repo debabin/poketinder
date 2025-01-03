@@ -6,7 +6,7 @@ const StatsLayout = () => {
   const { pathname } = useLocation();
 
   return (
-    <>
+    <div className='pt-4'>
       <h1 className='text-5xl font-light text-left mb-8'>Statistic page</h1>
       <Tabs defaultValue={pathname}>
         <div className='flex justify-start mb-4'>
@@ -21,7 +21,7 @@ const StatsLayout = () => {
         </div>
         <Outlet />
       </Tabs>
-    </>
+    </div>
   );
 };
 

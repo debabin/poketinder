@@ -3,18 +3,18 @@ import type { SelectQueryBuilder } from 'typeorm';
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import type { PokemonService } from '@/modules/pokemon';
+import { PokemonService } from '@/modules/pokemon';
 
 import { BaseResolver, BaseResponse } from '@/shared';
 
-import type {
+import {
   GetPokemonStatisticDto,
   GetStatisticPokemonsDto,
   GetTopPokemonsDto
 } from './dto';
 import type { PokemonStatistic } from './entities';
 import type { PaginationStatisticPokemonsResponse } from './statistic.model';
-import type { StatisticService } from './statistic.service';
+import { StatisticService } from './statistic.service';
 
 import {
   ActionPokemonDto

@@ -16,7 +16,7 @@ const StatsListPage = () => {
       {!state.isLoading && (
         <>
           {!!state.winnerPokemons.length && (
-            <div className='flex justify-between gap-3 mb-6'>
+            <div className='flex justify-between flex-col md:flex-row gap-3 mb-6'>
               {state.winnerPokemons.map((pokemon, index) => (
                 <StatisticWinnerPokemon key={pokemon.id} place={index + 1} pokemon={pokemon} />
               ))}
@@ -29,7 +29,7 @@ const StatsListPage = () => {
               visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.05 } }
             }}
             animate='visible'
-            className={cn('flex flex-col gap-3 mb-24', { 'animate-pulse': state.isFetching })}
+            className={cn('flex flex-col gap-3', { 'animate-pulse': state.isFetching })}
             initial='hidden'
           >
             {state.otherPokemons.map((pokemon) => (

@@ -37,7 +37,7 @@ export const BottomMenu = () => (
       inactiveProps={{
         className: 'text-gray-700'
       }}
-      to='/stats'
+      to='/stats/top'
     >
       <div className='flex flex-col items-center'>
         <BarChart className='size-6' />

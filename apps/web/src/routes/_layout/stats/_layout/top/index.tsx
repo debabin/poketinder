@@ -8,7 +8,7 @@ import { POKEMON_TOP } from './-constants';
 
 export const LoadingStatsTop = () => (
   <>
-    <div className='flex justify-between gap-3 mb-6'>
+    <div className='flex justify-between gap-3 mb-6 flex-col md:flex-row'>
       {Array.from({ length: POKEMON_TOP.WINNER }).map((_, index) => (
         <StatisticWinnerPokemonSkeleton key={index} />
       ))}
@@ -23,11 +23,9 @@ export const LoadingStatsTop = () => (
 );
 
 export const Route = createFileRoute('/_layout/stats/_layout/top/')({
-  loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(
+  loader: async ({ context }) =>
+    context.queryClient.ensureQueryData(
       getStatisticTopOptions({ params: { count: POKEMON_TOP.PLACES } })
-    );
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-  },
+    ),
   pendingComponent: LoadingStatsTop
 });

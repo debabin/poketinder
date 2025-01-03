@@ -1,10 +1,14 @@
-import { PokemonStatisticContent, PokemonStatisticSkeleton } from './components';
+import {
+  PokemonStatisticContent,
+  PokemonStatisticPlaceholder,
+  PokemonStatisticSkeleton
+} from './components';
 import { usePokemonStatistic } from './hooks/usePokemonStatistic';
 
 export const PokemonStatistic = () => {
   const { state } = usePokemonStatistic();
 
-  if (!state.prevPokemonId) return <div>placeholder</div>;
+  if (!state.prevPokemonId) return <PokemonStatisticPlaceholder />;
 
   return (
     <>

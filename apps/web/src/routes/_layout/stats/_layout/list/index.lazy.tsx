@@ -66,7 +66,7 @@ const StatsListPage = () => {
             visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.05 } }
           }}
           animate='visible'
-          className={cn('flex flex-col gap-3 mb-24', { 'animate-pulse': state.isFetching })}
+          className={cn('flex flex-col gap-3', { 'animate-pulse': state.isFetching })}
           initial='hidden'
         >
           {state.pokemons.map((pokemon) => (
