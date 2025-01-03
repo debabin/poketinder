@@ -72,7 +72,7 @@ export const PokemonSwiper = () => {
           {state.pokemon && (
             <PokemonCard className='h-[450px]' pokemon={state.pokemon}>
               <PokemonCardBackground
-                src={`backgrounds/bg-${getPokemonBackground(state.pokemon.types[0])}.png`}
+                src={`/backgrounds/bg-${getPokemonBackground(state.pokemon.types[0])}.png`}
               />
               <div className='absolute bottom-0 top-0 right-0 left-0 z-[1]' />
               <PokemonCardImage loading='lazy' />

@@ -3,10 +3,10 @@ import { Entity } from 'typeorm';
 
 import { Pokemon } from '@/modules/pokemon/entities';
 
-import { Statistic } from './statistic.entity';
+import type { Statistic } from './statistic.entity';
 
 @Entity('pokemon_statistic')
 export class PokemonStatistic extends Pokemon {
   @ApiProperty({ description: 'Pokemon statistic' })
-  statistic: Statistic
+  statistic: Statistic;
 }

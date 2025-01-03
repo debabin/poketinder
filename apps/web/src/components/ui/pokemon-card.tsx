@@ -29,7 +29,7 @@ const PokemonCard = React.forwardRef<HTMLDivElement, PokemonCardProps>(
     const value = React.useMemo(() => ({ pokemon }), [pokemon]);
 
     return (
-      <Card ref={ref} className={cn('relative', className)} {...props}>
+      <Card ref={ref} className={cn('relative w-[350px] h-[400px]', className)} {...props}>
         <PokemonCardContext.Provider value={value}>{children}</PokemonCardContext.Provider>
       </Card>
     );
@@ -202,10 +202,14 @@ const PokemonType = React.forwardRef<HTMLDivElement, PokemonCardTypeProps>(
 );
 PokemonType.displayName = 'PokemonCardType';
 
-const PokemonCardTypes = React.forwardRef<HTMLDivElement, React.ComponentProps<'div'>>(
+interface PokemonCardTypesProps extends React.ComponentProps<'div'> {
+  types?: string[];
+}
+
+const PokemonCardTypes = React.forwardRef<HTMLDivElement, PokemonCardTypesProps>(
   ({ className, ...props }, ref) => {
     const pokemonContext = React.useContext(PokemonCardContext);
-    const types = pokemonContext.pokemon?.types ?? [];
+    const types = pokemonContext.pokemon?.types ?? props.types ?? [];
 
     return (
       <div ref={ref} className={cn('flex gap-1', className)} {...props}>

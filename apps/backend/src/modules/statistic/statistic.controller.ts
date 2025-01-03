@@ -3,22 +3,36 @@ import type { SelectQueryBuilder } from 'typeorm';
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { PokemonService } from '@/modules/pokemon';
+import type { PokemonService } from '@/modules/pokemon';
 
 import { BaseResolver, BaseResponse } from '@/shared';
 
+import type {
+  GetPokemonStatisticDto,
+  GetStatisticPokemonsDto,
+  GetTopPokemonsDto
+} from './dto';
 import type { PokemonStatistic } from './entities';
 import type { PaginationStatisticPokemonsResponse } from './statistic.model';
-import { StatisticService } from './statistic.service';
+import type { StatisticService } from './statistic.service';
 
-import { ActionPokemonDto, GetPokemonsDto, GetPokemonStatisticDto, GetTopPokemonsDto } from './dto';
-import { PokemonStatisticResponse, StatisticPokemonsResponse, TopPokemonsResponse } from './statistic.model';
+import {
+  ActionPokemonDto
+} from './dto';
 import { RATING_QUERY } from './query';
+import {
+  PokemonStatisticResponse,
+  StatisticPokemonsResponse,
+  TopPokemonsResponse
+} from './statistic.model';
 
 @ApiTags('statistic')
 @Controller('/statistic')
 export class StatisticController extends BaseResolver {
-  constructor(private readonly statisticService: StatisticService, private readonly pokemonService: PokemonService) {
+  constructor(
+    private readonly statisticService: StatisticService,
+    private readonly pokemonService: PokemonService
+  ) {
     super();
   }
 
@@ -55,42 +69,51 @@ export class StatisticController extends BaseResolver {
     description: 'pokemons',
     type: StatisticPokemonsResponse
   })
-  async getStatisticPokemons(@Query() getPokemonsDto: GetPokemonsDto): Promise<StatisticPokemonsResponse> {
-    const pokemonQuery = (await this.pokemonService.createQueryBuilder('pokemon')).leftJoinAndMapOne(
+  async getStatisticPokemons(
+    @Query() getStatisticPokemonsDto: GetStatisticPokemonsDto
+  ): Promise<StatisticPokemonsResponse> {
+    const pokemonQuery = (
+      await this.pokemonService.createQueryBuilder('pokemon')
+    ).leftJoinAndMapOne(
       'pokemon.statistic',
       'statistic',
       'statistic',
-      'statistic.pokemonId = pokemon.pokemonId',
-    ) as SelectQueryBuilder<PokemonStatistic>
+      'statistic.pokemonId = pokemon.pokemonId'
+    ) as SelectQueryBuilder<PokemonStatistic>;
 
-    const rating = getPokemonsDto.rating ?? 'desc';
+    const rating = getStatisticPokemonsDto.rating ?? 'desc';
 
     pokemonQuery.addSelect(RATING_QUERY, 'rating');
 
     pokemonQuery.addOrderBy('rating', rating.toUpperCase() as 'ASC' | 'DESC');
     pokemonQuery.addOrderBy('statistic.smash', rating.toUpperCase() as 'ASC' | 'DESC');
 
-
-    if (getPokemonsDto.name) {
-      pokemonQuery.where('pokemon.name ILIKE :name', { name: `%${getPokemonsDto.name}%` });
+    if (
+      getStatisticPokemonsDto.types &&
+      Array.isArray(getStatisticPokemonsDto.types) &&
+      getStatisticPokemonsDto.types.length
+    ) {
+      pokemonQuery.andWhere('pokemon.types @> :types', { types: getStatisticPokemonsDto.types });
     }
 
-    if (getPokemonsDto.types && Array.isArray(getPokemonsDto.types) && getPokemonsDto.types.length) {
-      pokemonQuery.where('pokemon.types && :types', { types: getPokemonsDto.types });
+    if (getStatisticPokemonsDto.name) {
+      pokemonQuery.andWhere('pokemon.name ILIKE :name', {
+        name: `%${getStatisticPokemonsDto.name}%`
+      });
     }
 
-    pokemonQuery.skip(getPokemonsDto.offset).take(getPokemonsDto.limit);
+    pokemonQuery.skip(getStatisticPokemonsDto.offset).take(getStatisticPokemonsDto.limit);
 
     const [pokemons, itemCount] = await pokemonQuery.getManyAndCount();
-    const pageCount = Math.ceil(itemCount / getPokemonsDto.limit);
-    const page = Math.floor(getPokemonsDto.offset / getPokemonsDto.limit) + 1;
+    const pageCount = Math.ceil(itemCount / getStatisticPokemonsDto.limit);
+    const page = Math.floor(getStatisticPokemonsDto.offset / getStatisticPokemonsDto.limit) + 1;
     const prev = page > 1;
     const next = page < pageCount;
 
     const response = {
       pokemons,
-      offset: getPokemonsDto.offset,
-      limit: getPokemonsDto.limit,
+      offset: getStatisticPokemonsDto.offset,
+      limit: getStatisticPokemonsDto.limit,
       itemCount,
       page,
       pageCount,
@@ -114,17 +137,20 @@ export class StatisticController extends BaseResolver {
     description: 'Top pokemons',
     type: TopPokemonsResponse
   })
-  async getTopPokemons(@Query() getTopPokemonsDto: GetTopPokemonsDto): Promise<TopPokemonsResponse> {
+  async getTopPokemons(
+    @Query() getTopPokemonsDto: GetTopPokemonsDto
+  ): Promise<TopPokemonsResponse> {
     const { count = 10 } = getTopPokemonsDto;
-    const pokemonQuery = (await this.pokemonService.createQueryBuilder('pokemon')).leftJoinAndMapOne(
+    const pokemonQuery = (
+      await this.pokemonService.createQueryBuilder('pokemon')
+    ).leftJoinAndMapOne(
       'pokemon.statistic',
       'statistic',
       'statistic',
-      'statistic.pokemonId = pokemon.pokemonId',
-    ) as SelectQueryBuilder<PokemonStatistic>
+      'statistic.pokemonId = pokemon.pokemonId'
+    ) as SelectQueryBuilder<PokemonStatistic>;
 
     pokemonQuery.addSelect(RATING_QUERY, 'rating');
-
 
     pokemonQuery.addOrderBy('rating', 'DESC');
     pokemonQuery.take(count);

@@ -4,7 +4,7 @@ import { IsArray, IsIn, IsOptional, IsString } from 'class-validator';
 
 import { PaginationDto } from '@/shared';
 
-export class GetPokemonsDto extends PaginationDto {
+export class GetStatisticPokemonsDto extends PaginationDto {
   @ApiProperty({
     description: 'Filter pokemons by name (case-insensitive)',
     example: 'pikachu',
@@ -33,7 +33,8 @@ export class GetPokemonsDto extends PaginationDto {
     description: 'Filter pokemons by raiting type (smash or pass)',
     example: 'raiting',
     enum: ['asc', 'desc'],
-    required: false
+    required: false,
+    default: 'asc'
   })
   @IsOptional()
   @IsString()

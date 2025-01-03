@@ -4,26 +4,32 @@ import {
   useField,
   useIntersectionObserver
 } from '@siberiacancode/reactuse';
-// import { getRouteApi } from '@tanstack/react-router';
 import { keepPreviousData } from '@tanstack/react-query';
+import { getRouteApi } from '@tanstack/react-router';
+import { useState } from 'react';
 
 import { useGetStatisticPokemonsInfiniteQuery } from '@/utils/api/hooks';
 
 import { POKEMONS_REQUESTS_PAGINATION } from '../../../-constants';
 
-// const routeApi = getRouteApi('/_layout/stats/');
+const routeApi = getRouteApi('/_layout/stats/_layout/list/');
 
 export const useStatisticListTab = () => {
-  // const { offset, limit } = routeApi.useSearch();
-  const nameField = useField();
+  const navigate = routeApi.useNavigate();
+  const searchParams = routeApi.useSearch();
+  const nameField = useField({ initialValue: searchParams.name });
   const name = nameField.watch();
-  const debouncedValue = useDebounceValue(name, 500);
+  const debouncedName = useDebounceValue(name, 500);
+
+  const [types, setTypes] = useState<string[]>(searchParams.types);
+  const debouncedTypes = useDebounceValue(types, 500);
 
   const getPokemonsInfinityQuery = useGetStatisticPokemonsInfiniteQuery(
     {
       offset: POKEMONS_REQUESTS_PAGINATION.OFFSET,
       limit: POKEMONS_REQUESTS_PAGINATION.LIMIT,
-      ...(debouncedValue && { name: debouncedValue })
+      ...(debouncedName && { name: debouncedName }),
+      ...(debouncedTypes && { types: debouncedTypes })
     },
     {
       options: {
@@ -43,12 +49,19 @@ export const useStatisticListTab = () => {
     getPokemonsInfinityQuery.fetchNextPage();
   }, [intersectionObserver.inView]);
 
-  const onRefreshClick = () => {
-    getPokemonsInfinityQuery.refetch();
-  };
+  useDidUpdate(() => {
+    navigate({ search: { name, types } });
+  }, [name, types]);
+
+  const onRefreshClick = () => getPokemonsInfinityQuery.refetch();
 
   const pokemons =
     getPokemonsInfinityQuery.data?.pages?.flatMap((page) => page.data.response.pokemons) ?? [];
+
+  const onTypesSelect = (types: string[]) => {
+    setTypes(types);
+    navigate({ search: { types, name } });
+  };
 
   return {
     refs: {
@@ -60,10 +73,12 @@ export const useStatisticListTab = () => {
       isLoadMore: getPokemonsInfinityQuery.isFetchingNextPage,
       isRefreshing: getPokemonsInfinityQuery.isRefetching,
       pokemons,
-      nameField
+      nameField,
+      types
     },
     functions: {
-      onRefreshClick
+      onRefreshClick,
+      onTypesSelect
     }
   };
 };

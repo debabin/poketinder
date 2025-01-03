@@ -1,2 +1,2 @@
-export * from './statistic.module';
 export * from './entities';
+export * from './statistic.module';

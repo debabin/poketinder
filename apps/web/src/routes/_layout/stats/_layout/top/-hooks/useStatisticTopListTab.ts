@@ -1,18 +1,15 @@
-// import { getRouteApi } from '@tanstack/react-router';
 import { keepPreviousData } from '@tanstack/react-query';
 
 import { useGetStatisticTopQuery } from '@/utils/api/hooks';
 
-import { POKEMONS_REQUESTS_PAGINATION } from '../../../-constants';
-
-// const routeApi = getRouteApi('/_layout/stats/');
+import { POKEMON_TOP } from '../-constants';
 
 const STATISTIC_TOP_REFETCH_INTERVAL = 10_000;
 
 export const useStatisticTopListTab = () => {
   const getStatisticTopQuery = useGetStatisticTopQuery(
     {
-      count: POKEMONS_REQUESTS_PAGINATION.LIMIT
+      count: POKEMON_TOP.PLACES
     },
     {
       options: {
@@ -23,8 +20,8 @@ export const useStatisticTopListTab = () => {
   );
 
   const pokemons = getStatisticTopQuery.data?.data.pokemons ?? [];
-  const winnerPokemons = pokemons.slice(0, 3);
-  const otherPokemons = pokemons.slice(3, pokemons.length);
+  const winnerPokemons = pokemons.slice(0, POKEMON_TOP.WINNER);
+  const otherPokemons = pokemons.slice(POKEMON_TOP.WINNER, pokemons.length);
 
   return {
     state: {

@@ -1,4 +1,5 @@
 export * from '../../routes/-component/BottomMenu/BottomMenu';
+export * from './badge';
 export * from './button';
 export * from './card';
 export * from './command';
@@ -8,7 +9,9 @@ export * from './navigation-menu';
 export * from './pokemon-card';
 export * from './pokemon-statistics';
 export * from './popover';
+export * from './scroll-area';
 export * from './select';
+export * from './separator';
 export * from './skeleton';
 export * from './spinner';
 export * from './tabs';

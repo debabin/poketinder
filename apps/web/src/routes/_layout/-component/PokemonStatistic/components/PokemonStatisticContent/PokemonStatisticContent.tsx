@@ -37,7 +37,7 @@ export const PokemonStatisticContent = ({ statistic, pokemon }: PokemonStatistic
           <div>{statistic.pass}</div>
         </div>
         <PokemonCard className='h-[100px] w-full' pokemon={pokemon}>
-          <PokemonCardBackground src={`backgrounds/bg-${pokemonBackground}.png`} />
+          <PokemonCardBackground src={`/backgrounds/bg-${pokemonBackground}.png`} />
           <PokemonCardImage className='min-h-26 min-w-26' />
         </PokemonCard>
         <div className='flex flex-col gap-1 items-start w-full'>
